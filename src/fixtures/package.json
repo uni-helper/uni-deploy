@@ -1,0 +1,8 @@
+{
+  "uni-deploy": {
+    "from": "package.json",
+    "hello": {
+      "config": "package.json"
+    }
+  }
+}
