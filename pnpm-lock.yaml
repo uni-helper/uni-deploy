@@ -45,6 +45,7 @@ specifiers:
   tsup: ^6.5.0
   tsx: ^3.12.1
   typescript: ^4.9.3
+  unconfig: ^0.3.7
   vitest: ^0.25.2
   vue: ^3.2.45
 
@@ -67,6 +68,7 @@ dependencies:
   pino: 8.7.0
   pino-pretty: 9.1.1
   strip-json-comments: 5.0.0
+  unconfig: 0.3.7
 
 devDependencies:
   '@babel/core': 7.20.2
@@ -107,6 +109,10 @@ packages:
       '@jridgewell/gen-mapping': 0.1.1
       '@jridgewell/trace-mapping': 0.3.17
     dev: true
+
+  /@antfu/utils/0.5.2:
+    resolution: {integrity: sha512-CQkeV+oJxUazwjlHD0/3ZD08QWKuGQkhnrKo3e6ly5pd48VUpXbb77q0xMU4+vc2CkJnDS02Eq/M9ugyX20XZA==}
+    dev: false
 
   /@babel/code-frame/7.18.6:
     resolution: {integrity: sha512-TDCmlK5eOvH+eH7cdAFlNXeVJqWIQ7gW9tY1GJIpUtFb6CmjVyq2VM3u71bOyR8CRihcCgMUYoDNyLXao3+70Q==}
@@ -5209,6 +5215,10 @@ packages:
       object-keys: 1.1.1
     dev: true
 
+  /defu/6.1.1:
+    resolution: {integrity: sha512-aA964RUCsBt0FGoNIlA3uFgo2hO+WWC0fiC6DBps/0SFzkKcYoM/3CzVLIa5xSsrFjdioMdYgAIbwo80qp2MoA==}
+    dev: false
+
   /degenerator/3.0.2:
     resolution: {integrity: sha512-c0mef3SNQo56t6urUU6tdQAs+ThoD0o9B9MJ8HEt7NQcGEILCRFqQb7ZbP9JAv+QF1Ky5plydhMR/IrqWDm+TQ==}
     engines: {node: '>= 6'}
@@ -8103,6 +8113,11 @@ packages:
       '@jimp/types': 0.9.8_@jimp+custom@0.9.8
       core-js: 3.26.1
       regenerator-runtime: 0.13.10
+    dev: false
+
+  /jiti/1.16.0:
+    resolution: {integrity: sha512-L3BJStEf5NAqNuzrpfbN71dp43mYIcBUlCRea/vdyv5dW/AYa1d4bpelko4SHdY3I6eN9Wzyasxirj1/vv5kmg==}
+    hasBin: true
     dev: false
 
   /joycon/3.1.1:
@@ -12489,6 +12504,14 @@ packages:
     dependencies:
       buffer: 5.7.1
       through: 2.3.8
+    dev: false
+
+  /unconfig/0.3.7:
+    resolution: {integrity: sha512-1589b7oGa8ILBYpta7TndM5mLHLzHUqBfhszeZxuUBrjO/RoQ52VGVWsS3w0C0GLNxO9RPmqkf6BmIvBApaRdA==}
+    dependencies:
+      '@antfu/utils': 0.5.2
+      defu: 6.1.1
+      jiti: 1.16.0
     dev: false
 
   /unicode-canonical-property-names-ecmascript/2.0.0:
