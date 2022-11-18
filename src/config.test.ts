@@ -44,7 +44,6 @@ describe('config', () => {
     const loaded = await loadConfig({
       cwd: resolve(__dirname, 'fixtures'),
     });
-    console.log('loaded', loaded.path);
     expect(loaded.path).toSatisfy(
       (v) => typeof v === 'string' && v.endsWith(join('fixtures', 'uni-deploy.config.ts')),
     );
