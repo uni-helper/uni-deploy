@@ -8,19 +8,20 @@ import { logger, validatePlatforms, validateIms } from './utils';
 
 const program = new Command(pkg.name).version(pkg.version).description(pkg.description);
 
-let config: UniDeployConfig;
-try {
-  const { data } = await loadConfig();
-  if (data) config = mergeConfig(data);
-  else throw new Error();
-} catch (error) {
-  throw new Error(`读取配置失败。${error}`);
+async function getConfig(): Promise<UniDeployConfig> {
+  try {
+    const { data } = await loadConfig();
+    return data ? mergeConfig(data) : {};
+  } catch {
+    return {};
+  }
 }
 
 program
   .command('validate')
   .description('检查配置文件')
-  .action(() => {
+  .action(async () => {
+    const config = await getConfig();
     validatePlatforms(config);
     validateIms(config);
   });
@@ -29,6 +30,7 @@ program
   .command('upload')
   .description('上传')
   .action(async () => {
+    const config = await getConfig();
     // 检查
     const validatePlatformsResults = validatePlatforms(config);
     const validateImsResults = validateIms(config);
@@ -56,6 +58,7 @@ program
   .command('preview')
   .description('预览')
   .action(async () => {
+    const config = await getConfig();
     // 检查
     const validatePlatformsResults = validatePlatforms(config);
     const validateImsResults = validateIms(config);
@@ -81,4 +84,4 @@ program
     logger.info('预览操作结束。');
   });
 
-program.parse();
+await program.parseAsync();
