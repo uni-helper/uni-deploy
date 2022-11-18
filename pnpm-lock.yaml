@@ -22,7 +22,7 @@ specifiers:
   esbuild: ^0.15.14
   eslint: ^8.27.0
   globby: ^13.1.2
-  got: ^12.5.2
+  got: ^12.5.3
   husky: ^8.0.2
   is-ci: ^3.0.1
   joycon: ^3.1.1
@@ -56,7 +56,7 @@ dependencies:
   commander: 9.4.1
   esbuild: 0.15.14
   globby: 13.1.2
-  got: 12.5.2
+  got: 12.5.3
   joycon: 3.1.1
   lodash: 4.17.21
   lodash-es: 4.17.21
@@ -7269,8 +7269,8 @@ packages:
       responselike: 3.0.0
     dev: true
 
-  /got/12.5.2:
-    resolution: {integrity: sha512-guHGMSEcsA5m1oPRweXUJnug0vuvlkX9wx5hzOka+ZBrBUOJHU0Z1JcNu3QE5IPGnA5aXUsQHdWOD4eJg9/v3A==}
+  /got/12.5.3:
+    resolution: {integrity: sha512-8wKnb9MGU8IPGRIo+/ukTy9XLJBwDiCpIf5TVzQ9Cpol50eMTpBq2GAuDsuDIz7hTYmZgMgC1e9ydr6kSDWs3w==}
     engines: {node: '>=14.16'}
     dependencies:
       '@sindresorhus/is': 5.3.0
@@ -9766,7 +9766,7 @@ packages:
     resolution: {integrity: sha512-hySwcV8RAWeAfPsXb9/HGSPn8lwDnv6fabH+obUZKX169QknRkRhPxd1yMubpKDskLFATkl3jHpNtVtDPFA0Wg==}
     engines: {node: '>=14.16'}
     dependencies:
-      got: 12.5.2
+      got: 12.5.3
       registry-auth-token: 5.0.1
       registry-url: 6.0.1
       semver: 7.3.8
