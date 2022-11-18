@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
 import pkg from '../package.json';
-import { loadConfig, mergeConfig, UniAppDeployConfig } from './config';
+import { loadConfig, mergeConfig, UniDeployConfig } from './config';
 import { Im, imNotifyPreviewResult, imNotifyUploadResult } from './im';
 import { Platform, platformPreview, platformUpload } from './platform';
 import { logger, validatePlatforms, validateIms } from './utils';
 
 const program = new Command(pkg.name).version(pkg.version).description(pkg.description);
 
-let config: UniAppDeployConfig;
+let config: UniDeployConfig;
 try {
   const { data } = await loadConfig();
   if (data) config = mergeConfig(data);

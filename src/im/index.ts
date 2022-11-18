@@ -1,4 +1,4 @@
-import { UniAppDeployConfig, GotOptions } from '../config';
+import { UniDeployConfig, GotOptions } from '../config';
 import {
   dingtalkNotifyMpWeixinUploadResult,
   dingtalkNotifyMpWeixinPreviewResult,
@@ -31,12 +31,12 @@ export const imNotifyPreviewResultMap = {
   dingtalk: dingtalkNotifyMpWeixinPreviewResult,
 };
 
-export function imValidate(config: UniAppDeployConfig, { im }: { im: Im }) {
+export function imValidate(config: UniDeployConfig, { im }: { im: Im }) {
   return imValidateMap[im](config);
 }
 
 export function imNotifyUploadResult(
-  config: UniAppDeployConfig,
+  config: UniDeployConfig,
   {
     im,
     result,
@@ -51,7 +51,7 @@ export function imNotifyUploadResult(
 }
 
 export function imNotifyPreviewResult(
-  config: UniAppDeployConfig,
+  config: UniDeployConfig,
   {
     im,
     result,

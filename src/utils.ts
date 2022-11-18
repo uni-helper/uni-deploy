@@ -5,7 +5,7 @@ import stripJsonComments from 'strip-json-comments';
 import { get } from 'lodash-unified';
 import pino from 'pino';
 import pinoPretty from 'pino-pretty';
-import { UniAppDeployConfig, defaultCwd } from './config';
+import { UniDeployConfig, defaultCwd } from './config';
 import { ims, imValidate } from './im';
 import { platforms, platformValidate } from './platform';
 
@@ -40,12 +40,12 @@ export async function loadJson(filePath: string) {
   }
 }
 
-export function getCwd(config: UniAppDeployConfig) {
+export function getCwd(config: UniDeployConfig) {
   return config.cwd ?? defaultCwd;
 }
 
 export function getFileField(
-  config: UniAppDeployConfig,
+  config: UniDeployConfig,
   filters: { entry: string | string[]; prop: string | string[] }[],
 ): string | number | boolean | Array<any> | Record<string, any> {
   const cwd = getCwd(config);
@@ -70,7 +70,7 @@ export function getFileField(
   return '';
 }
 
-export function getFilePath(config: UniAppDeployConfig, filters: { entry: string | string[] }[]) {
+export function getFilePath(config: UniDeployConfig, filters: { entry: string | string[] }[]) {
   const cwd = getCwd(config);
   const entries = globbySync(
     filters.map((f) =>
@@ -84,7 +84,7 @@ export function getFilePath(config: UniAppDeployConfig, filters: { entry: string
   return entries[0];
 }
 
-export function getFileDir(config: UniAppDeployConfig, filters: { entry: string | string[] }[]) {
+export function getFileDir(config: UniDeployConfig, filters: { entry: string | string[] }[]) {
   const cwd = getCwd(config);
   const entries = globbySync(
     filters.map((f) =>
@@ -98,12 +98,12 @@ export function getFileDir(config: UniAppDeployConfig, filters: { entry: string 
   return resolve(entries[0], '..');
 }
 
-export function validatePlatforms(config: UniAppDeployConfig) {
+export function validatePlatforms(config: UniDeployConfig) {
   const results = platforms.map((platform) => platformValidate(config, { platform }));
   return results;
 }
 
-export function validateIms(config: UniAppDeployConfig) {
+export function validateIms(config: UniDeployConfig) {
   const results = ims.map((im) => imValidate(config, { im }));
   return results;
 }

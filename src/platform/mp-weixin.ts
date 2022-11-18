@@ -3,7 +3,7 @@ import pRetry from 'p-retry';
 import { MiniProgramCI } from 'miniprogram-ci/dist/@types/types';
 import { ICreateProjectOptions } from 'miniprogram-ci/dist/@types/ci/project';
 import { IInnerUploadOptions, IInnerUploadResult } from 'miniprogram-ci/dist/@types/ci/upload';
-import { UniAppDeployConfig, PRetryOptions } from '../config';
+import { UniDeployConfig, PRetryOptions } from '../config';
 import { getFileField, getFileDir, getFilePath, logger } from '../utils';
 
 export interface MpWeixinConfig {
@@ -109,11 +109,11 @@ export interface MpWeixinConfig {
   preview?: Partial<Omit<IInnerUploadOptions, 'project' | 'test'> & { test?: true }>;
 }
 
-export function mpWeixinGetConfig(config: UniAppDeployConfig) {
+export function mpWeixinGetConfig(config: UniDeployConfig) {
   return config?.platform?.['mp-weixin'];
 }
 
-export function mpWeixinGetProjectAppid(config: UniAppDeployConfig) {
+export function mpWeixinGetProjectAppid(config: UniDeployConfig) {
   return (config?.platform?.['mp-weixin']?.project?.appid ??
     getFileField(config, [
       { entry: ['src', 'manifest.json'], prop: ['mp-weixin', 'appid'] },
@@ -124,7 +124,7 @@ export function mpWeixinGetProjectAppid(config: UniAppDeployConfig) {
     ])) as string;
 }
 
-export function mpWeixinGetProjectPath(config: UniAppDeployConfig) {
+export function mpWeixinGetProjectPath(config: UniDeployConfig) {
   return (
     config?.platform?.['mp-weixin']?.project?.projectPath ??
     getFileDir(config, [
@@ -135,7 +135,7 @@ export function mpWeixinGetProjectPath(config: UniAppDeployConfig) {
   );
 }
 
-export function mpWeixinGetProjectPrivateKeyPath(config: UniAppDeployConfig) {
+export function mpWeixinGetProjectPrivateKeyPath(config: UniDeployConfig) {
   const appid = mpWeixinGetProjectAppid(config);
   return (
     config?.platform?.['mp-weixin']?.project?.privateKeyPath ??
@@ -147,11 +147,11 @@ export function mpWeixinGetProjectPrivateKeyPath(config: UniAppDeployConfig) {
   );
 }
 
-export function mpWeixinGetProjectType(config: UniAppDeployConfig) {
+export function mpWeixinGetProjectType(config: UniDeployConfig) {
   return config?.platform?.['mp-weixin']?.project?.type ?? 'miniProgram';
 }
 
-export function mpWeixinValidate(config: UniAppDeployConfig) {
+export function mpWeixinValidate(config: UniDeployConfig) {
   const mpWeixinConfig = mpWeixinGetConfig(config);
   if (!mpWeixinConfig) {
     logger.info('没有配置微信小程序，跳过微信小程序操作。');
@@ -165,7 +165,7 @@ export function mpWeixinValidate(config: UniAppDeployConfig) {
   return true;
 }
 
-export function mpWeixinCreateProject(config: UniAppDeployConfig) {
+export function mpWeixinCreateProject(config: UniDeployConfig) {
   const project = new ci.Project({
     ...config?.platform?.['mp-weixin']?.project,
     appid: mpWeixinGetProjectAppid(config),
@@ -176,7 +176,7 @@ export function mpWeixinCreateProject(config: UniAppDeployConfig) {
   return project;
 }
 
-export function mpWeixinGetUploadVersion(config: UniAppDeployConfig) {
+export function mpWeixinGetUploadVersion(config: UniDeployConfig) {
   return (config?.platform?.['mp-weixin']?.upload?.version ??
     getFileField(config, [
       { entry: 'package.json', prop: 'version' },
@@ -185,7 +185,7 @@ export function mpWeixinGetUploadVersion(config: UniAppDeployConfig) {
     ])) as string;
 }
 
-export function mpWeixinGetUploadSetting(config: UniAppDeployConfig) {
+export function mpWeixinGetUploadSetting(config: UniDeployConfig) {
   return (config?.platform?.['mp-weixin']?.upload?.setting ??
     getFileField(config, [
       { entry: ['src', 'manifest.json'], prop: ['mp-weixin', 'setting'] },
@@ -196,12 +196,12 @@ export function mpWeixinGetUploadSetting(config: UniAppDeployConfig) {
     ])) as MiniProgramCI.ICompileSettings;
 }
 
-export function mpWeixinGetUploadDesc(config: UniAppDeployConfig) {
+export function mpWeixinGetUploadDesc(config: UniDeployConfig) {
   return config?.platform?.['mp-weixin']?.upload?.desc ?? 'Uploaded by uni-deploy';
 }
 
 export async function mpWeixinUpload(
-  config: UniAppDeployConfig,
+  config: UniDeployConfig,
   { pRetryOptions }: { pRetryOptions?: PRetryOptions },
 ): Promise<IInnerUploadResult> {
   return pRetry(
@@ -217,7 +217,7 @@ export async function mpWeixinUpload(
   );
 }
 
-export function mpWeixinGetPreviewVersion(config: UniAppDeployConfig) {
+export function mpWeixinGetPreviewVersion(config: UniDeployConfig) {
   return (config?.platform?.['mp-weixin']?.preview?.version ??
     getFileField(config, [
       { entry: 'package.json', prop: 'version' },
@@ -226,7 +226,7 @@ export function mpWeixinGetPreviewVersion(config: UniAppDeployConfig) {
     ])) as string;
 }
 
-export function mpWeixinGetPreviewSetting(config: UniAppDeployConfig) {
+export function mpWeixinGetPreviewSetting(config: UniDeployConfig) {
   return (config?.platform?.['mp-weixin']?.preview?.setting ??
     getFileField(config, [
       { entry: ['src', 'manifest.json'], prop: ['mp-weixin', 'setting'] },
@@ -237,20 +237,20 @@ export function mpWeixinGetPreviewSetting(config: UniAppDeployConfig) {
     ])) as MiniProgramCI.ICompileSettings;
 }
 
-export function mpWeixinGetPreviewDesc(config: UniAppDeployConfig) {
+export function mpWeixinGetPreviewDesc(config: UniDeployConfig) {
   return config?.platform?.['mp-weixin']?.preview?.desc ?? 'Uploaded by uni-deploy';
 }
 
-export function mpWeixinGetPreviewQrcodeFormat(config: UniAppDeployConfig) {
+export function mpWeixinGetPreviewQrcodeFormat(config: UniDeployConfig) {
   return config?.platform?.['mp-weixin']?.preview?.qrcodeFormat ?? 'image';
 }
 
-export function mpWeixinGetPreviewQrcodeOutputDest(config: UniAppDeployConfig) {
+export function mpWeixinGetPreviewQrcodeOutputDest(config: UniDeployConfig) {
   return config?.platform?.['mp-weixin']?.preview?.qrcodeOutputDest ?? 'qrcode.png';
 }
 
 export async function mpWeixinPreview(
-  config: UniAppDeployConfig,
+  config: UniDeployConfig,
   { pRetryOptions }: { pRetryOptions?: PRetryOptions },
 ) {
   return pRetry(

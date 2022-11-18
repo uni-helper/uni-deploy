@@ -4,7 +4,7 @@ import got, { ExtendOptions as GotOptions } from 'got';
 import { IPreviewResult } from 'miniprogram-ci/dist/@types/ci/preview';
 import { IInnerUploadResult } from 'miniprogram-ci/dist/@types/ci/upload';
 import { getFilePath, logger } from '../utils';
-import { UniAppDeployConfig } from '../config';
+import { UniDeployConfig } from '../config';
 
 export interface WecomConfig {
   /**
@@ -14,15 +14,15 @@ export interface WecomConfig {
   webhook?: string | string[];
 }
 
-export function wecomGetConfig(config: UniAppDeployConfig) {
+export function wecomGetConfig(config: UniDeployConfig) {
   return config?.im?.wecom;
 }
 
-export function wecomGetWebhook(config: UniAppDeployConfig) {
+export function wecomGetWebhook(config: UniDeployConfig) {
   return config?.im?.wecom?.webhook ?? '';
 }
 
-export function wecomValidate(config: UniAppDeployConfig) {
+export function wecomValidate(config: UniDeployConfig) {
   const wecomConfig = wecomGetConfig(config);
   if (!wecomConfig) {
     logger.info('没有配置企业微信，跳过企业微信操作。');
@@ -37,7 +37,7 @@ export function wecomValidate(config: UniAppDeployConfig) {
 }
 
 export async function wecomNotifyMpWeixinUploadResult(
-  config: UniAppDeployConfig,
+  config: UniDeployConfig,
   {
     result,
     buildGotOptions,
@@ -64,7 +64,7 @@ export async function wecomNotifyMpWeixinUploadResult(
 }
 
 export async function wecomNotifyMpWeixinPreviewResult(
-  config: UniAppDeployConfig,
+  config: UniDeployConfig,
   {
     result,
     buildGotOptions,

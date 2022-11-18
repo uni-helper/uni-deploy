@@ -4,7 +4,7 @@ import got, { ExtendOptions as GotOptions } from 'got';
 import { IPreviewResult } from 'miniprogram-ci/dist/@types/ci/preview';
 import { IInnerUploadResult } from 'miniprogram-ci/dist/@types/ci/upload';
 import { getFilePath, logger } from '../utils';
-import { UniAppDeployConfig } from '../config';
+import { UniDeployConfig } from '../config';
 
 export interface DingtalkConfig {
   /**
@@ -14,15 +14,15 @@ export interface DingtalkConfig {
   webhook?: string | string[];
 }
 
-export function dingtalkGetConfig(config: UniAppDeployConfig) {
+export function dingtalkGetConfig(config: UniDeployConfig) {
   return config?.im?.dingtalk;
 }
 
-export function dingtalkGetWebhook(config: UniAppDeployConfig) {
+export function dingtalkGetWebhook(config: UniDeployConfig) {
   return config?.im?.dingtalk?.webhook ?? '';
 }
 
-export function dingtalkValidate(config: UniAppDeployConfig) {
+export function dingtalkValidate(config: UniDeployConfig) {
   const dingtalkConfig = dingtalkGetConfig(config);
   if (!dingtalkConfig) {
     logger.info('没有配置钉钉，跳过钉钉操作。');
@@ -37,7 +37,7 @@ export function dingtalkValidate(config: UniAppDeployConfig) {
 }
 
 export async function dingtalkNotifyMpWeixinUploadResult(
-  config: UniAppDeployConfig,
+  config: UniDeployConfig,
   {
     result,
     buildGotOptions,
@@ -64,7 +64,7 @@ export async function dingtalkNotifyMpWeixinUploadResult(
 }
 
 export async function dingtalkNotifyMpWeixinPreviewResult(
-  config: UniAppDeployConfig,
+  config: UniDeployConfig,
   {
     result,
     buildGotOptions,

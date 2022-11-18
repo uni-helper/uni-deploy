@@ -8,7 +8,7 @@ import { loadJson } from './utils';
 export type { Options as PRetryOptions } from 'p-retry';
 export type { Options as GotOptions } from 'got';
 
-export interface UniAppDeployConfig {
+export interface UniDeployConfig {
   cwd?: string;
   platform?: {
     'mp-weixin'?: MpWeixinConfig;
@@ -22,15 +22,15 @@ export interface UniAppDeployConfig {
 
 export const defaultCwd = process.cwd();
 
-export const defaultConfig: UniAppDeployConfig = {
+export const defaultConfig: UniDeployConfig = {
   cwd: defaultCwd,
 };
 
-export function defineConfig(config: UniAppDeployConfig) {
+export function defineConfig(config: UniDeployConfig) {
   return config;
 }
 
-export function mergeConfig(config: UniAppDeployConfig) {
+export function mergeConfig(config: UniDeployConfig) {
   return {
     ...defaultConfig,
     ...config,
@@ -39,7 +39,7 @@ export function mergeConfig(config: UniAppDeployConfig) {
 
 export async function loadConfig(options?: Partial<JoyConOptions>): Promise<{
   path?: string;
-  data?: UniAppDeployConfig;
+  data?: UniDeployConfig;
 }> {
   const joycon = new JoyCon();
   const configPath = await joycon.resolve({
