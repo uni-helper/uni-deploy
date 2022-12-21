@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
 import pkg from '../package.json';
-import { loadConfig, mergeConfig, UniDeployConfig } from './config';
+import { defaultConfig, loadConfig, mergeConfig, UniDeployConfig } from './config';
 import { Im, imNotifyPreviewResult, imNotifyUploadResult } from './im';
 import { Platform, platformPreview, platformUpload } from './platform';
 import { logger, validatePlatforms, validateIms } from './utils';
@@ -11,9 +11,9 @@ const program = new Command(pkg.name).version(pkg.version).description(pkg.descr
 async function getConfig(): Promise<UniDeployConfig> {
   try {
     const { data } = await loadConfig();
-    return data ? mergeConfig(data) : {};
+    return data ? mergeConfig(data) : defaultConfig;
   } catch {
-    return {};
+    return defaultConfig;
   }
 }
 

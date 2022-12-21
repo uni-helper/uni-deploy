@@ -1,9 +1,13 @@
-import { UniDeployConfig, PRetryOptions } from '../config';
 import { mpWeixinUpload, mpWeixinPreview, mpWeixinValidate } from './mp-weixin';
+import type { UniDeployConfig, PRetryOptions } from '../config';
 
 export * from './mp-weixin';
 
 export const platforms = ['mp-weixin'] as const;
+
+export const platformMap = {
+  'mp-weixin': '微信小程序',
+};
 
 export type Platform = typeof platforms[number];
 
@@ -19,39 +23,22 @@ export const platformPreviewMap = {
   'mp-weixin': mpWeixinPreview,
 };
 
-export function platformValidate(
-  config: UniDeployConfig,
-  {
-    platform,
-  }: {
-    platform: Platform;
-  },
-) {
+export function platformValidate(config: UniDeployConfig, platform: Platform) {
   return platformValidateMap[platform](config);
 }
 
 export function platformUpload(
   config: UniDeployConfig,
-  {
-    platform,
-    pRetryOptions,
-  }: {
-    platform: Platform;
-    pRetryOptions?: PRetryOptions;
-  },
+  platform: Platform,
+  pRetryOptions?: PRetryOptions,
 ) {
-  return platformUploadMap[platform](config, { pRetryOptions });
+  return platformUploadMap[platform](config, pRetryOptions);
 }
 
 export function platformPreview(
   config: UniDeployConfig,
-  {
-    platform,
-    pRetryOptions,
-  }: {
-    platform: Platform;
-    pRetryOptions?: PRetryOptions;
-  },
+  platform: Platform,
+  pRetryOptions?: PRetryOptions,
 ) {
-  return platformPreviewMap[platform](config, { pRetryOptions });
+  return platformPreviewMap[platform](config, pRetryOptions);
 }

@@ -5,9 +5,9 @@ import stripJsonComments from 'strip-json-comments';
 import { get } from 'lodash-unified';
 import pino from 'pino';
 import pinoPretty from 'pino-pretty';
-import { UniDeployConfig, defaultCwd } from './config';
 import { ims, imValidate } from './im';
 import { platforms, platformValidate } from './platform';
+import type { UniDeployConfig } from './config';
 
 export const pinoPrettyStream = pinoPretty({
   colorize: true,
@@ -40,19 +40,13 @@ export async function loadJson(filePath: string) {
   }
 }
 
-export function getCwd(config: UniDeployConfig) {
-  return config.cwd ?? defaultCwd;
-}
-
 export function getFileField(
   config: UniDeployConfig,
   filters: { entry: string | string[]; prop: string | string[] }[],
 ): string | number | boolean | Array<any> | Record<string, any> {
-  const cwd = getCwd(config);
+  const { cwd } = config;
   const entries = globbySync(
-    filters.map((f) =>
-      typeof f.entry === 'string' ? resolve(cwd, f.entry) : resolve(cwd, ...f.entry),
-    ),
+    filters.map((f) => (Array.isArray(f.entry) ? resolve(cwd, ...f.entry) : resolve(cwd, f.entry))),
     { ignore: globbyIgnore },
   );
   for (const [index, entry] of entries.entries()) {
@@ -60,9 +54,6 @@ export function getFileField(
       const content = JSON.parse(stripJsonComments(readFileSync(entry, 'utf-8')));
       const field = get(content, filters[index].prop);
       if (field != null) return field;
-      if (index === entries.length - 1 && !field) {
-        return '';
-      }
     } catch (error) {
       return '';
     }
@@ -71,31 +62,21 @@ export function getFileField(
 }
 
 export function getFilePath(config: UniDeployConfig, filters: { entry: string | string[] }[]) {
-  const cwd = getCwd(config);
+  const { cwd } = config;
   const entries = globbySync(
-    filters.map((f) =>
-      typeof f.entry === 'string' ? resolve(cwd, f.entry) : resolve(cwd, ...f.entry),
-    ),
+    filters.map((f) => (Array.isArray(f.entry) ? resolve(cwd, ...f.entry) : resolve(cwd, f.entry))),
     { ignore: globbyIgnore },
   );
-  if (entries.length === 0) {
-    return '';
-  }
-  return entries[0];
+  return entries[0] ?? '';
 }
 
 export function getFileDir(config: UniDeployConfig, filters: { entry: string | string[] }[]) {
-  const cwd = getCwd(config);
+  const { cwd } = config;
   const entries = globbySync(
-    filters.map((f) =>
-      typeof f.entry === 'string' ? resolve(cwd, f.entry) : resolve(cwd, ...f.entry),
-    ),
+    filters.map((f) => (Array.isArray(f.entry) ? resolve(cwd, ...f.entry) : resolve(cwd, f.entry))),
     { ignore: globbyIgnore },
   );
-  if (entries.length === 0) {
-    return '';
-  }
-  return resolve(entries[0], '..');
+  return entries[0] ? resolve(entries[0], '..') : '';
 }
 
 export function validatePlatforms(config: UniDeployConfig) {

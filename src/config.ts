@@ -1,29 +1,23 @@
-import JoyCon, { Options as JoyConOptions } from 'joycon';
+import JoyCon from 'joycon';
 import { bundleRequire } from 'bundle-require';
 import stripJsonComments from 'strip-json-comments';
-// import {
-//   loadConfig as unconfigLoadConfig,
-//   LoadConfigOptions as UnconfigLoadConfigOptions,
-// } from 'unconfig';
-// import { sourcePackageJsonFields } from 'unconfig/presets';
-import { MpWeixinConfig } from './platform';
-import { WecomConfig, DingtalkConfig } from './im';
 import { loadJson } from './utils';
+import type { Options as JoyConOptions } from 'joycon';
+import type { MpWeixinConfig } from './platform';
+import type { WecomConfig, DingtalkConfig } from './im';
 
 export type { Options as PRetryOptions } from 'p-retry';
 export type { Options as GotOptions } from 'got';
 
 export interface UniDeployConfig {
-  cwd?: string;
-  platform?: {
-    'mp-weixin'?: MpWeixinConfig;
-  };
-  im?: {
-    wecom?: WecomConfig;
-    dingtalk?: DingtalkConfig;
-  };
+  cwd: string;
+  'mp-weixin'?: MpWeixinConfig;
+  wecom?: WecomConfig;
+  dingtalk?: DingtalkConfig;
   [key: string]: any;
 }
+
+export interface UniDeployUserConfig extends Partial<UniDeployConfig> {}
 
 export const defaultCwd = process.cwd();
 
@@ -31,36 +25,16 @@ export const defaultConfig: UniDeployConfig = {
   cwd: defaultCwd,
 };
 
-export function defineConfig(config: UniDeployConfig) {
+export function defineConfig(config: UniDeployUserConfig) {
   return config;
 }
 
-export function mergeConfig(config: UniDeployConfig) {
+export function mergeConfig(config: UniDeployUserConfig) {
   return {
     ...defaultConfig,
     ...config,
   };
 }
-
-// export async function loadConfig(
-//   options?: Partial<UnconfigLoadConfigOptions>,
-// ): Promise<{ path?: string; data?: UniDeployConfig }> {
-//   const { config, sources } = await unconfigLoadConfig<UniDeployConfig>({
-//     sources: [
-//       {
-//         files: 'uni-deploy.config',
-//       },
-//       sourcePackageJsonFields({
-//         fields: ['uni-deploy'],
-//       }),
-//     ],
-//     ...options,
-//   });
-//   return {
-//     path: sources[0],
-//     data: config,
-//   };
-// }
 
 export async function loadConfig(options?: Partial<JoyConOptions>): Promise<{
   path?: string;

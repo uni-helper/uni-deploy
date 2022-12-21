@@ -1,14 +1,10 @@
 import { UniDeployConfig, GotOptions } from '../config';
 import {
-  dingtalkNotifyMpWeixinUploadResult,
-  dingtalkNotifyMpWeixinPreviewResult,
+  dingtalkNotifyUploadResult,
+  dingtalkNotifyPreviewResult,
   dingtalkValidate,
 } from './dingtalk';
-import {
-  wecomNotifyMpWeixinUploadResult,
-  wecomNotifyMpWeixinPreviewResult,
-  wecomValidate,
-} from './wecom';
+import { wecomNotifyUploadResult, wecomNotifyPreviewResult, wecomValidate } from './wecom';
 export * from './dingtalk';
 export * from './wecom';
 
@@ -22,13 +18,13 @@ export const imValidateMap = {
 };
 
 export const imNotifyUploadResultMap = {
-  wecom: wecomNotifyMpWeixinUploadResult,
-  dingtalk: dingtalkNotifyMpWeixinUploadResult,
+  wecom: wecomNotifyUploadResult,
+  dingtalk: dingtalkNotifyUploadResult,
 };
 
 export const imNotifyPreviewResultMap = {
-  wecom: wecomNotifyMpWeixinPreviewResult,
-  dingtalk: dingtalkNotifyMpWeixinPreviewResult,
+  wecom: wecomNotifyPreviewResult,
+  dingtalk: dingtalkNotifyPreviewResult,
 };
 
 export function imValidate(config: UniDeployConfig, { im }: { im: Im }) {
