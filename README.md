@@ -250,3 +250,8 @@ export interface WecomConfig {
 ```typescript
 import {...} from '@uni-helper/uni-deploy';
 ```
+
+## 致谢
+
+- [taro-deploy](https://github.com/linjackson78/taro-deploy)
+- [@tarojs/plugin-mini-ci](https://docs.taro.zone/docs/plugin-mini-ci)
