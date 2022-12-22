@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
 import pkg from '../package.json';
-import { defaultConfig, loadConfig, mergeConfig, UniDeployConfig } from './config';
-import { Im, imNotifyPreviewResult, imNotifyUploadResult } from './im';
-import { Platform, platformPreview, platformUpload } from './platform';
+import { defaultConfig, loadConfig, mergeConfig } from './config';
+import { imNotifyPreview, imNotifyUpload } from './im';
+import { platformPreview, platformUpload } from './platform';
 import { logger, validatePlatforms, validateIms } from './utils';
+import type { UniDeployConfig, Im, Platform } from './types';
 
 const program = new Command(pkg.name).version(pkg.version).description(pkg.description);
 
@@ -24,6 +25,8 @@ program
     const config = await getConfig();
     validatePlatforms(config);
     validateIms(config);
+    // 结束
+    logger.info('检查操作结束。');
   });
 
 program
@@ -40,7 +43,7 @@ program
     ) as Platform[];
     // 批量上传
     const uploadResults = await Promise.all(
-      platforms.map((platform) => platformUpload(config, { platform })),
+      platforms.map((platform) => platformUpload(config, platform)),
     );
     // 只处理配置正确的 im
     const ims = Object.keys(config.im ?? {}).filter(
@@ -48,7 +51,9 @@ program
     ) as Im[];
     // 批量通知
     await Promise.all(
-      ims.map((im) => uploadResults.map((result) => imNotifyUploadResult(config, { im, result }))),
+      ims.map((im) =>
+        uploadResults.map((result, index) => imNotifyUpload(config, im, platforms[index], result)),
+      ),
     );
     // 结束
     logger.info('上传操作结束。');
@@ -68,7 +73,7 @@ program
     ) as Platform[];
     // 批量预览
     const previewResults = await Promise.all(
-      platforms.map((platform) => platformPreview(config, { platform })),
+      platforms.map((platform) => platformPreview(config, platform)),
     );
     // 只处理配置正确的 im
     const ims = Object.keys(config.im ?? {}).filter(
@@ -77,7 +82,9 @@ program
     // 批量通知
     await Promise.all(
       ims.map((im) =>
-        previewResults.map((result) => imNotifyPreviewResult(config, { im, result })),
+        previewResults.map((result, index) =>
+          imNotifyPreview(config, im, platforms[index], result),
+        ),
       ),
     );
     // 结束
