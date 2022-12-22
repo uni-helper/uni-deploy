@@ -1,62 +1,52 @@
-import { UniDeployConfig, GotOptions } from '../config';
-import {
-  dingtalkNotifyUploadResult,
-  dingtalkNotifyPreviewResult,
-  dingtalkValidate,
-} from './dingtalk';
-import { wecomNotifyUploadResult, wecomNotifyPreviewResult, wecomValidate } from './wecom';
+import { dingtalkNotifyUpload, dingtalkNotifyPreview, dingtalkValidate } from './dingtalk';
+import { wecomNotifyUpload, wecomNotifyPreview, wecomValidate } from './wecom';
+import type {
+  UniDeployConfig,
+  Im,
+  ImValidateMap,
+  ImNotifyUploadMap,
+  ImNotifyPreviewMap,
+  ImNotifyUpload,
+  ImNotifyPreview,
+  ImValidate,
+} from '../types';
+
 export * from './dingtalk';
 export * from './wecom';
 
-export const ims = ['wecom'] as const;
+export const ims: Im[] = ['wecom'];
 
-export type Im = typeof ims[number];
-
-export const imValidateMap = {
+export const imValidateMap: ImValidateMap = {
   wecom: wecomValidate,
   dingtalk: dingtalkValidate,
 };
 
-export const imNotifyUploadResultMap = {
-  wecom: wecomNotifyUploadResult,
-  dingtalk: dingtalkNotifyUploadResult,
+export const imNotifyUploadMap: ImNotifyUploadMap = {
+  wecom: wecomNotifyUpload,
+  dingtalk: dingtalkNotifyUpload,
 };
 
-export const imNotifyPreviewResultMap = {
-  wecom: wecomNotifyPreviewResult,
-  dingtalk: dingtalkNotifyPreviewResult,
+export const imNotifyPreviewMap: ImNotifyPreviewMap = {
+  wecom: wecomNotifyPreview,
+  dingtalk: dingtalkNotifyPreview,
 };
 
-export function imValidate(config: UniDeployConfig, { im }: { im: Im }) {
-  return imValidateMap[im](config);
-}
+export const imValidate: ImValidate = (config: UniDeployConfig, im: Im) =>
+  imValidateMap[im](config);
 
-export function imNotifyUploadResult(
-  config: UniDeployConfig,
-  {
-    im,
+export const imNotifyUpload: ImNotifyUpload = (config, im, platform, result, buildGotOptions) =>
+  imNotifyUploadMap[im](
+    config,
+    platform,
     result,
-    buildGotOptions,
-  }: {
-    im: Im;
-    result: any;
-    buildGotOptions?: <T>(result: Promise<T> | T) => GotOptions;
-  },
-) {
-  return imNotifyUploadResultMap[im](config, { result, buildGotOptions });
-}
+    buildGotOptions ? (c, p, r) => buildGotOptions(c, im, p, r) : undefined,
+  );
 
-export function imNotifyPreviewResult(
-  config: UniDeployConfig,
-  {
-    im,
+export const imNotifyPreview: ImNotifyPreview = (config, im, platform, result, buildGotOptions) => {
+  return imNotifyPreviewMap[im](
+    config,
+    platform,
     result,
-    buildGotOptions,
-  }: {
-    im: Im;
-    result: any;
-    buildGotOptions?: <T>(result: Promise<T> | T) => GotOptions;
-  },
-) {
-  return imNotifyPreviewResultMap[im](config, { result, buildGotOptions });
-}
+    buildGotOptions ? (c, p, r) => buildGotOptions(c, im, p, r) : undefined,
+  );
+};
