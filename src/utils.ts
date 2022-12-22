@@ -5,9 +5,8 @@ import stripJsonComments from 'strip-json-comments';
 import { get } from 'lodash-unified';
 import pino from 'pino';
 import pinoPretty from 'pino-pretty';
-import { ims, imValidate } from './im';
 import { platforms, platformValidate } from './platform';
-import type { UniDeployConfig } from './config';
+import type { UniDeployConfig } from './types';
 
 export const pinoPrettyStream = pinoPretty({
   colorize: true,
@@ -20,15 +19,15 @@ export const logger = pino(pinoPrettyStream);
 
 export const globbyIgnore = ['**/node_modules', '**/dist', '**/.hbuilder', '**/.hbuilderx'];
 
-export function jsoncParse(data: string) {
+export const jsoncParse = (data: string) => {
   try {
     return new Function('return ' + stripJsonComments(data).trim())();
   } catch {
     return {};
   }
-}
+};
 
-export async function loadJson(filePath: string) {
+export const loadJson = async (filePath: string) => {
   try {
     return jsoncParse(readFileSync(filePath, 'utf8'));
   } catch (error) {
@@ -38,12 +37,12 @@ export async function loadJson(filePath: string) {
       throw error;
     }
   }
-}
+};
 
-export function getFileField(
+export const getFileField = (
   config: UniDeployConfig,
   filters: { entry: string | string[]; prop: string | string[] }[],
-): string | number | boolean | Array<any> | Record<string, any> {
+): string | number | boolean | Array<any> | Record<string, any> => {
   const { cwd } = config;
   const entries = globbySync(
     filters.map((f) => (Array.isArray(f.entry) ? resolve(cwd, ...f.entry) : resolve(cwd, f.entry))),
@@ -59,32 +58,25 @@ export function getFileField(
     }
   }
   return '';
-}
+};
 
-export function getFilePath(config: UniDeployConfig, filters: { entry: string | string[] }[]) {
+export const getFilePath = (config: UniDeployConfig, filters: { entry: string | string[] }[]) => {
   const { cwd } = config;
   const entries = globbySync(
     filters.map((f) => (Array.isArray(f.entry) ? resolve(cwd, ...f.entry) : resolve(cwd, f.entry))),
     { ignore: globbyIgnore },
   );
   return entries[0] ?? '';
-}
+};
 
-export function getFileDir(config: UniDeployConfig, filters: { entry: string | string[] }[]) {
+export const getFileDir = (config: UniDeployConfig, filters: { entry: string | string[] }[]) => {
   const { cwd } = config;
   const entries = globbySync(
     filters.map((f) => (Array.isArray(f.entry) ? resolve(cwd, ...f.entry) : resolve(cwd, f.entry))),
     { ignore: globbyIgnore },
   );
   return entries[0] ? resolve(entries[0], '..') : '';
-}
+};
 
-export function validatePlatforms(config: UniDeployConfig) {
-  const results = platforms.map((platform) => platformValidate(config, { platform }));
-  return results;
-}
-
-export function validateIms(config: UniDeployConfig) {
-  const results = ims.map((im) => imValidate(config, { im }));
-  return results;
-}
+export const validatePlatforms = (config: UniDeployConfig) =>
+  platforms.map((platform) => platformValidate(config, platform));
