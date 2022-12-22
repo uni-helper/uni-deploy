@@ -2,7 +2,7 @@ import type { ICreateProjectOptions } from 'miniprogram-ci/dist/@types/ci/projec
 import type { IInnerUploadOptions } from 'miniprogram-ci/dist/@types/ci/upload';
 
 import type { Options as PRetryOptions } from 'p-retry';
-import type { Options as GotOptions } from 'got';
+import type { ExtendOptions as GotOptions } from 'got';
 import type { Options as JoyConOptions } from 'joycon';
 
 export { PRetryOptions, GotOptions, JoyConOptions };
@@ -50,18 +50,61 @@ export interface ImConfig {
 }
 export interface WecomConfig extends ImConfig {}
 export interface DingtalkConfig extends ImConfig {}
+export interface ImValidate {
+  (config: UniDeployConfig, im: Im): boolean;
+}
+export interface SpecificImValidate {
+  (config: UniDeployConfig): boolean;
+}
+export type ImValidateMap = Record<Im, SpecificImValidate>;
 export interface ImNotifyUploadBuildGotOptions {
   (config: UniDeployConfig, im: Im, platform: Platform, result: Promise<any> | any): GotOptions;
+}
+export interface ImNotifyUpload {
+  (
+    config: UniDeployConfig,
+    im: Im,
+    platform: Platform,
+    result: Promise<any> | any,
+    buildGotOptions?: ImNotifyUploadBuildGotOptions,
+  ): Promise<any>;
 }
 export interface SpecificImNotifyUploadBuildGotOptions {
   (config: UniDeployConfig, platform: Platform, result: Promise<any> | any): GotOptions;
 }
+export interface SpecificImNotifyUpload {
+  (
+    config: UniDeployConfig,
+    platform: Platform,
+    result: Promise<any> | any,
+    buildGotOptions?: SpecificImNotifyUploadBuildGotOptions,
+  ): Promise<any>;
+}
+export type ImNotifyUploadMap = Record<Im, SpecificImNotifyUpload>;
 export interface ImNotifyPreviewBuildGotOptions {
   (config: UniDeployConfig, im: Im, platform: Platform, result: Promise<any> | any): GotOptions;
+}
+export interface ImNotifyPreview {
+  (
+    config: UniDeployConfig,
+    im: Im,
+    platform: Platform,
+    result: Promise<any> | any,
+    buildGotOptions?: ImNotifyPreviewBuildGotOptions,
+  ): Promise<any>;
 }
 export interface SpecificImNotifyPreviewBuildGotOptions {
   (config: UniDeployConfig, platform: Platform, result: Promise<any> | any): GotOptions;
 }
+export interface SpecificImNotifyPreview {
+  (
+    config: UniDeployConfig,
+    platform: Platform,
+    result: Promise<any> | any,
+    buildGotOptions?: SpecificImNotifyPreviewBuildGotOptions,
+  ): Promise<any>;
+}
+export type ImNotifyPreviewMap = Record<Im, SpecificImNotifyPreview>;
 
 export interface UniDeployConfig {
   cwd: string;
