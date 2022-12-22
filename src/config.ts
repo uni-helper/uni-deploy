@@ -2,22 +2,7 @@ import JoyCon from 'joycon';
 import { bundleRequire } from 'bundle-require';
 import stripJsonComments from 'strip-json-comments';
 import { loadJson } from './utils';
-import type { Options as JoyConOptions } from 'joycon';
-import type { MpWeixinConfig } from './platform';
-import type { WecomConfig, DingtalkConfig } from './im';
-
-export type { Options as PRetryOptions } from 'p-retry';
-export type { Options as GotOptions } from 'got';
-
-export interface UniDeployConfig {
-  cwd: string;
-  'mp-weixin'?: MpWeixinConfig;
-  wecom?: WecomConfig;
-  dingtalk?: DingtalkConfig;
-  [key: string]: any;
-}
-
-export interface UniDeployUserConfig extends Partial<UniDeployConfig> {}
+import type { JoyConOptions, UniDeployConfig, UniDeployUserConfig } from './types';
 
 export const defaultCwd = process.cwd();
 
@@ -25,21 +10,19 @@ export const defaultConfig: UniDeployConfig = {
   cwd: defaultCwd,
 };
 
-export function defineConfig(config: UniDeployUserConfig) {
-  return config;
-}
+export const defineConfig = (config: UniDeployUserConfig) => config;
 
-export function mergeConfig(config: UniDeployUserConfig) {
-  return {
-    ...defaultConfig,
-    ...config,
-  };
-}
+export const mergeConfig = (config: UniDeployUserConfig) => ({
+  ...defaultConfig,
+  ...config,
+});
 
-export async function loadConfig(options?: Partial<JoyConOptions>): Promise<{
+export const loadConfig = async (
+  options?: Partial<JoyConOptions>,
+): Promise<{
   path?: string;
   data?: UniDeployConfig;
-}> {
+}> => {
   const joycon = new JoyCon();
   const configPath = await joycon.resolve({
     files: [
@@ -74,4 +57,4 @@ export async function loadConfig(options?: Partial<JoyConOptions>): Promise<{
     path: configPath,
     data: config.mod['uni-deploy'] || config.mod.default || config.mod,
   };
-}
+};
