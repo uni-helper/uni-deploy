@@ -6,6 +6,7 @@ import { get } from 'lodash-unified';
 import pino from 'pino';
 import pinoPretty from 'pino-pretty';
 import { platforms, platformValidate } from './platform';
+import { ims, imValidate } from './im';
 import type { UniDeployConfig } from './types';
 
 export const pinoPrettyStream = pinoPretty({
@@ -80,3 +81,5 @@ export const getFileDir = (config: UniDeployConfig, filters: { entry: string | s
 
 export const validatePlatforms = (config: UniDeployConfig) =>
   platforms.map((platform) => platformValidate(config, platform));
+
+export const validateIms = (config: UniDeployConfig) => ims.map((im) => imValidate(config, im));
