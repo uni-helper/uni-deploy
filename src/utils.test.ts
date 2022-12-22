@@ -1,45 +1,41 @@
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, it, expect } from 'vitest';
-import { getCwd, getFileDir, getFileField, getFilePath } from './utils';
+import { getFileDir, getFileField, getFilePath } from './utils';
+import { defaultConfig } from './config';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 describe('utils', () => {
-  it('getCwd', () => {
-    expect(getCwd({})).toBe(process.cwd());
-    expect(getCwd({ cwd: '..' })).toBe('..');
-  });
-
   it('getFileField', () => {
     expect(
-      getFileField({}, [
+      getFileField(defaultConfig, [
         { entry: [__dirname, 'fixtures', 'manifest.json'], prop: ['mp-weixin', 'appid'] },
         { entry: [__dirname, '**', 'fixtures', 'manifest.json'], prop: ['mp-weixin', 'appid'] },
       ]),
     ).toBe('touristappid');
-    expect(getFileField({}, [{ entry: ['not-exist.file'], prop: ['not', 'exist', 'prop'] }])).toBe(
-      '',
-    );
+    expect(
+      getFileField(defaultConfig, [{ entry: ['not-exist.file'], prop: ['not', 'exist', 'prop'] }]),
+    ).toBe('');
   });
 
   it('getFilePath', () => {
     expect(
-      getFilePath({}, [
+      getFilePath(defaultConfig, [
         { entry: [__dirname, 'fixtures', 'manifest.json'] },
         { entry: [__dirname, '**', 'fixtures', 'manifest.json'] },
       ]),
     ).toBe(resolve(__dirname, 'fixtures', 'manifest.json'));
-    expect(getFilePath({}, [{ entry: ['not-exist.file'] }])).toBe('');
+    expect(getFilePath(defaultConfig, [{ entry: ['not-exist.file'] }])).toBe('');
   });
 
   it('getFileDir', () => {
     expect(
-      getFileDir({}, [
+      getFileDir(defaultConfig, [
         { entry: [__dirname, 'fixtures', 'manifest.json'] },
         { entry: [__dirname, '**', 'fixtures', 'manifest.json'] },
       ]),
     ).toBe(resolve(__dirname, 'fixtures'));
-    expect(getFileDir({}, [{ entry: ['not-exist.file'] }])).toBe('');
+    expect(getFileDir(defaultConfig, [{ entry: ['not-exist.file'] }])).toBe('');
   });
 });
