@@ -1,44 +1,48 @@
 import { mpWeixinUpload, mpWeixinPreview, mpWeixinValidate } from './mp-weixin';
-import type { UniDeployConfig, PRetryOptions } from '../config';
+import type {
+  UniDeployConfig,
+  PRetryOptions,
+  Platform,
+  PlatformTextMap,
+  PlatformValidateMap,
+  PlatformUploadMap,
+  PlatformPreviewMap,
+  PlatformValidate,
+  PlatformUpload,
+  PlatformPreview,
+} from '../types';
 
 export * from './mp-weixin';
 
-export const platforms = ['mp-weixin'] as const;
+export const platforms: Platform[] = ['mp-weixin'];
 
-export const platformMap = {
+export const platformMap: PlatformTextMap = {
   'mp-weixin': '微信小程序',
 };
 
-export type Platform = typeof platforms[number];
-
-export const platformValidateMap = {
+export const platformValidateMap: PlatformValidateMap = {
   'mp-weixin': mpWeixinValidate,
 };
 
-export const platformUploadMap = {
+export const platformUploadMap: PlatformUploadMap = {
   'mp-weixin': mpWeixinUpload,
 };
 
-export const platformPreviewMap = {
+export const platformPreviewMap: PlatformPreviewMap = {
   'mp-weixin': mpWeixinPreview,
 };
 
-export function platformValidate(config: UniDeployConfig, platform: Platform) {
-  return platformValidateMap[platform](config);
-}
+export const platformValidate: PlatformValidate = (config: UniDeployConfig, platform: Platform) =>
+  platformValidateMap[platform](config);
 
-export function platformUpload(
+export const platformUpload: PlatformUpload = (
   config: UniDeployConfig,
   platform: Platform,
   pRetryOptions?: PRetryOptions,
-) {
-  return platformUploadMap[platform](config, pRetryOptions);
-}
+) => platformUploadMap[platform](config, pRetryOptions);
 
-export function platformPreview(
+export const platformPreview: PlatformPreview = (
   config: UniDeployConfig,
   platform: Platform,
   pRetryOptions?: PRetryOptions,
-) {
-  return platformPreviewMap[platform](config, pRetryOptions);
-}
+) => platformPreviewMap[platform](config, pRetryOptions);
