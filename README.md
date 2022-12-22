@@ -38,6 +38,8 @@ pnpm install @uni-helper/uni-deploy -D
 cnpm install @uni-helper/uni-deploy -D
 ```
 
+不考虑 `uni_modules`。
+
 ### 配置文件
 
 支持以下配置：
@@ -64,16 +66,14 @@ export default defineConfig({
   cwd: process.cwd(),
 
   /* 应用平台 */
-  platform: {
-    // 微信小程序配置
-    'mp-weixin': { ... },
-  },
+  // 微信小程序配置
+  'mp-weixin': { ... },
 
-  /* 沟通工具 */
-  im: {
-    // 企业微信配置
-    'wecom': { ... },
-  },
+  /* 办公平台 */
+  // 钉钉配置
+  dingtalk: { ... },
+  // 企业微信配置
+  wecom: { ... },
 })
 ```
 
@@ -81,7 +81,7 @@ export default defineConfig({
 
 ### 应用平台
 
-如果不需要某个应用平台，传入 `falsy` 值即可。
+如果不需要某个应用平台，不传值或者传入 `falsy` 值。
 
 #### 微信小程序
 
@@ -92,121 +92,24 @@ import { ICreateProjectOptions } from 'miniprogram-ci/dist/@types/ci/project';
 import { IInnerUploadOptions } from 'miniprogram-ci/dist/@types/ci/upload';
 
 export interface MpWeixinConfig {
-  /** miniprogram-ci ci.project */
-  // {
-  //   /**
-  //    * 小程序 / 小游戏 appid
-  //    * 如果没有填写，会尝试按以下顺序读取，如果读取失败将无法运行
-  //    * ./src/manifest.json mp-weixin appid
-  //    * ./**/manifest.json mp-weixin appid
-  //    * ./dist/mp-weixin/project.config.json appid
-  //    * ./dist/build/mp-weixin/project.config.json appid
-  //    * ./dist/**\/mp-weixin/project.config.json appid
-  //    */
-  //   appid?: string;
-  //   /**
-  //    * 项目路径
-  //    * 如果没有填写，会尝试按以下顺序寻找 project.config.json 并将其所在目录作为项目路径，如果寻找失败将无法运行
-  //    * ./dist/mp-weixin/project.config.json
-  //    * ./dist/build/mp-weixin/project.config.json
-  //    * ./dist/**\/mp-weixin/project.config.json
-  //    */
-  //   path?: string;
-  //   /**
-  //    * 私钥内容
-  //    */
-  //   privateKey?: string;
-  //   /**
-  //    * 私钥路径
-  //    * 如果没有填写，会尝试按以下顺序寻找 .key 文件并将其路径作为私钥路径，寻找失败不影响继续运行
-  //    * ./**\/private.${appid}.key
-  //    * ./**\/weixin.${appid}.key
-  //    * ./**\/wechat.${appid}.key
-  //    */
-  //   privateKeyPath?: string;
-  //   /**
-  //    * 当前项目类型，默认为 miniprogram
-  //    */
-  //   type?: MiniProgramCI.ProjectType;
-  // };
+  /** 用于 miniprogram-ci ci.project */
   project?: Partial<ICreateProjectOptions>;
-
-  /** miniprogram-ci ci.upload */
-  // {
-  //   /**
-  //    * 版本号
-  //    * 如果没有填写，会尝试按以下顺序读取，如果读取失败将无法运行
-  //    * ./package.json version
-  //    * ./src/manifest.json versionName
-  //    * ./**/manifest.json versionName
-  //    */
-  //   version?: string;
-  //   /**
-  //    * 编译设置
-  //    * 如果没有填写，会尝试按以下顺序读取，如果读取失败将无法运行
-  //    * ./src/manifest.json mp-weixin setting
-  //    * ./**/manifest.json mp-weixin setting
-  //    * ./dist/mp-weixin/project.config.json setting
-  //    * ./dist/build/mp-weixin/project.config.json setting
-  //    * ./dist/**\/mp-weixin/project.config.json setting
-  //    */
-  //   setting?: MiniProgramCI.ICompileSettings;
-  //   /**
-  //    * 备注，默认为 Uploaded by uni-deploy
-  //    */
-  //   desc?: string;
-  // };
+  /** 用于 miniprogram-ci ci.upload */
   upload?: Partial<Omit<IInnerUploadOptions, 'project'>>;
-
-  /** miniprogram-ci ci.preview */
-  // {
-  //   /**
-  //    * 版本号
-  //    * 如果没有填写，会尝试按以下顺序读取，如果读取失败将无法运行
-  //    * ./package.json version
-  //    * ./src/manifest.json versionName
-  //    * ./**/manifest.json versionName
-  //    */
-  //   version?: string;
-  //   /**
-  //    * 编译设置
-  //    * 如果没有填写，会尝试按以下顺序读取，如果读取失败将无法运行
-  //    * ./src/manifest.json mp-weixin setting
-  //    * ./**/manifest.json mp-weixin setting
-  //    * ./dist/mp-weixin/project.config.json setting
-  //    * ./dist/build/mp-weixin/project.config.json setting
-  //    * ./dist/**\/mp-weixin/project.config.json setting
-  //    */
-  //   setting?: MiniProgramCI.ICompileSettings;
-  //   /**
-  //    * 备注，默认为 Uploaded by uni-deploy
-  //    */
-  //   desc?: string;
-  //   /**
-  //    * 二维码格式，默认为 image
-  //    */
-  //   qrcodeFormat?: 'base64' | 'image' | 'terminal';
-  //   /**
-  //    * 二维码输出路径，默认为 qrcode.png
-  //    */
-  //   qrcodeOutputDest?: string;
-  // };
+  /** 用于 miniprogram-ci ci.preview */
   preview?: Partial<Omit<IInnerUploadOptions, 'project' | 'test'> & { test?: true }>;
 }
 ```
 
-### 沟通工具
+### 办公平台
 
-如果不需要某个沟通工具，传入 `falsy` 值即可。
+如果不需要某个沟通工具，不传值或者传入 `falsy` 值。
 
 #### 钉钉
 
 ```typescript
 export interface DingtalkConfig {
-  /**
-   * 钉钉机器人 webhook
-   * 如果不填写，无法发送请求
-   */
+  /** 钉钉机器人 webhook */
   webhook?: string | string[];
 }
 ```
@@ -215,10 +118,7 @@ export interface DingtalkConfig {
 
 ```typescript
 export interface WecomConfig {
-  /**
-   * 企业微信机器人 webhook
-   * 如果不填写，无法发送请求
-   */
+  /** 企业微信机器人 webhook */
   webhook?: string | string[];
 }
 ```
