@@ -1,6 +1,6 @@
 {
   "name": "@uni-helper/uni-deploy",
-  "version": "0.0.14",
+  "version": "0.1.0",
   "description": "自动化部署 uni-app 应用",
   "keywords": [
     "uni-app",
