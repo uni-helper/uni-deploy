@@ -2,18 +2,7 @@ import ci from 'miniprogram-ci';
 import pRetry from 'p-retry';
 import { MiniProgramCI } from 'miniprogram-ci/dist/@types/types';
 import { getFileField, getFileDir, getFilePath, logger } from '../utils';
-import type { ICreateProjectOptions } from 'miniprogram-ci/dist/@types/ci/project';
-import type { IInnerUploadOptions } from 'miniprogram-ci/dist/@types/ci/upload';
 import type { UniDeployConfig, PRetryOptions } from '../types';
-
-export interface MpWeixinConfig {
-  /** 用于 miniprogram-ci ci.project */
-  project?: Partial<ICreateProjectOptions>;
-  /** 用于 miniprogram-ci ci.upload */
-  upload?: Partial<Omit<IInnerUploadOptions, 'project'>>;
-  /** 用于 miniprogram-ci ci.preview */
-  preview?: Partial<Omit<IInnerUploadOptions, 'project' | 'test'> & { test?: true }>;
-}
 
 export const mpWeixinGetConfig = (config: UniDeployConfig) => config?.['mp-weixin'];
 
