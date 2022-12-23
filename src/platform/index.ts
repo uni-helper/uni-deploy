@@ -1,4 +1,5 @@
 import { mpWeixinUpload, mpWeixinPreview, mpWeixinValidate } from './mp-weixin';
+import { mpAlipayUpload, mpAlipayPreview, mpAlipayValidate } from './mp-alipay';
 import type {
   UniDeployConfig,
   PRetryOptions,
@@ -13,23 +14,28 @@ import type {
 } from '../types';
 
 export * from './mp-weixin';
+export * from './mp-alipay';
 
-export const platforms: Platform[] = ['mp-weixin'];
+export const platforms: Platform[] = ['mp-weixin', 'mp-alipay'];
 
 export const platformMap: PlatformTextMap = {
   'mp-weixin': '微信小程序',
+  'mp-alipay': '支付宝小程序',
 };
 
 export const platformValidateMap: PlatformValidateMap = {
   'mp-weixin': mpWeixinValidate,
+  'mp-alipay': mpAlipayValidate,
 };
 
 export const platformUploadMap: PlatformUploadMap = {
   'mp-weixin': mpWeixinUpload,
+  'mp-alipay': mpAlipayUpload,
 };
 
 export const platformPreviewMap: PlatformPreviewMap = {
   'mp-weixin': mpWeixinPreview,
+  'mp-alipay': mpAlipayPreview,
 };
 
 export const platformValidate: PlatformValidate = (config: UniDeployConfig, platform: Platform) =>

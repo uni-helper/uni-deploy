@@ -1,5 +1,9 @@
-import type { ICreateProjectOptions } from 'miniprogram-ci/dist/@types/ci/project';
-import type { IInnerUploadOptions } from 'miniprogram-ci/dist/@types/ci/upload';
+import type { ICreateProjectOptions as WechatProjectOptions } from 'miniprogram-ci/dist/@types/ci/project';
+import type { IInnerUploadOptions as WechatUploadOptions } from 'miniprogram-ci/dist/@types/ci/upload';
+import type {
+  IUploadOptions as AlipayUploadOptions,
+  IPreviewArgs as AlipayPreviewOptions,
+} from 'minidev';
 
 import type { Options as PRetryOptions } from 'p-retry';
 import type { ExtendOptions as GotOptions } from 'got';
@@ -7,7 +11,7 @@ import type { Options as JoyConOptions } from 'joycon';
 
 export { PRetryOptions, GotOptions, JoyConOptions };
 
-export type Platform = 'mp-weixin';
+export type Platform = 'mp-weixin' | 'mp-alipay';
 export type PlatformTextMap = Record<Platform, string>;
 export interface PlatformConfig {
   upload?: Record<string, any>;
@@ -15,11 +19,21 @@ export interface PlatformConfig {
 }
 export interface MpWeixinConfig extends PlatformConfig {
   /** 用于 miniprogram-ci ci.project */
-  project?: Partial<ICreateProjectOptions>;
+  project?: Partial<WechatProjectOptions>;
   /** 用于 miniprogram-ci ci.upload */
-  upload?: Partial<Omit<IInnerUploadOptions, 'project'>>;
+  upload?: Partial<Omit<WechatUploadOptions, 'project'>>;
   /** 用于 miniprogram-ci ci.preview */
-  preview?: Partial<Omit<IInnerUploadOptions, 'project' | 'test'> & { test?: true }>;
+  preview?: Partial<Omit<WechatUploadOptions, 'project' | 'test'> & { test?: true }>;
+}
+export interface MpAlipayConfig extends PlatformConfig {
+  project?: Partial<{
+    appid: string;
+    projectPath: string;
+    privateKey: string;
+    toolId: string;
+  }>;
+  upload?: Partial<Omit<AlipayUploadOptions, 'appId' | 'project'>>;
+  preview?: Partial<Omit<AlipayPreviewOptions, 'appId' | 'project'>>;
 }
 export interface PlatformValidate {
   (config: UniDeployConfig, platform: Platform): boolean;
@@ -109,6 +123,7 @@ export type ImNotifyPreviewMap = Record<Im, SpecificImNotifyPreview>;
 export interface UniDeployConfig {
   cwd: string;
   'mp-weixin'?: MpWeixinConfig;
+  'mp-alipay'?: MpAlipayConfig;
   wecom?: WecomConfig;
   dingtalk?: DingtalkConfig;
   [key: string]: any;
