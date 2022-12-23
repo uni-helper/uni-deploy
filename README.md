@@ -4,8 +4,6 @@
 
 [![npm](https://img.shields.io/npm/v/@uni-helper/uni-deploy)](https://www.npmjs.com/package/@uni-helper/uni-deploy)
 
-**WIP**
-
 支持在脚本文件和 CI/CD 中调用以自动部署 `uni-app` 应用。
 
 ## 起步
@@ -68,6 +66,8 @@ export default defineConfig({
   /* 应用平台 */
   // 微信小程序配置
   'mp-weixin': { ... },
+  // 支付宝小程序配置
+  'mp-alipay': { ... },
 
   /* 办公平台 */
   // 钉钉配置
@@ -88,16 +88,38 @@ export default defineConfig({
 类型定义如下。
 
 ```typescript
-import { ICreateProjectOptions } from 'miniprogram-ci/dist/@types/ci/project';
-import { IInnerUploadOptions } from 'miniprogram-ci/dist/@types/ci/upload';
+import type { ICreateProjectOptions as WechatProjectOptions } from 'miniprogram-ci/dist/@types/ci/project';
+import type { IInnerUploadOptions as WechatUploadOptions } from 'miniprogram-ci/dist/@types/ci/upload';
 
-export interface MpWeixinConfig {
+export interface MpWeixinConfig extends PlatformConfig {
   /** 用于 miniprogram-ci ci.project */
-  project?: Partial<ICreateProjectOptions>;
+  project?: Partial<WechatProjectOptions>;
   /** 用于 miniprogram-ci ci.upload */
-  upload?: Partial<Omit<IInnerUploadOptions, 'project'>>;
+  upload?: Partial<Omit<WechatUploadOptions, 'project'>>;
   /** 用于 miniprogram-ci ci.preview */
-  preview?: Partial<Omit<IInnerUploadOptions, 'project' | 'test'> & { test?: true }>;
+  preview?: Partial<Omit<WechatUploadOptions, 'project' | 'test'> & { test?: true }>;
+}
+```
+
+#### 支付宝小程序
+
+类型定义如下。
+
+```typescript
+import type {
+  IUploadOptions as AlipayUploadOptions,
+  IPreviewArgs as AlipayPreviewOptions,
+} from 'minidev';
+
+export interface MpAlipayConfig extends PlatformConfig {
+  project?: Partial<{
+    appid: string;
+    projectPath: string;
+    privateKey: string;
+    toolId: string;
+  }>;
+  upload?: Partial<Omit<AlipayUploadOptions, 'appId' | 'project'>>;
+  preview?: Partial<Omit<AlipayPreviewOptions, 'appId' | 'project'>>;
 }
 ```
 
