@@ -51,7 +51,7 @@ export const mpWeixinValidate = (config: UniDeployConfig) => {
   return true;
 };
 
-export const mpWeixinCreateProject = (config: UniDeployConfig) =>
+export const mpWeixinGetProject = (config: UniDeployConfig) =>
   new ci.Project({
     ...config?.['mp-weixin']?.project,
     appid: mpWeixinGetProjectAppid(config),
@@ -83,11 +83,11 @@ export const mpWeixinUpload = async (config: UniDeployConfig, pRetryOptions?: PR
   pRetry(
     () =>
       ci.upload({
-        ...config?.['mp-weixin']?.upload,
-        project: mpWeixinCreateProject(config),
         version: mpWeixinGetUploadVersion(config),
         setting: mpWeixinGetUploadSetting(config),
         desc: mpWeixinGetUploadDesc(config),
+        ...config?.['mp-weixin']?.upload,
+        project: mpWeixinGetProject(config),
       }),
     pRetryOptions,
   );
@@ -121,13 +121,13 @@ export const mpWeixinPreview = async (config: UniDeployConfig, pRetryOptions?: P
   pRetry(
     () =>
       ci.preview({
-        ...config?.['mp-weixin']?.preview,
-        project: mpWeixinCreateProject(config),
         version: mpWeixinGetPreviewVersion(config),
         setting: mpWeixinGetPreviewSetting(config),
         desc: mpWeixinGetPreviewDesc(config),
         qrcodeFormat: mpWeixinGetPreviewQrcodeFormat(config),
         qrcodeOutputDest: mpWeixinGetPreviewQrcodeOutputDest(config),
+        ...config?.['mp-weixin']?.preview,
+        project: mpWeixinGetProject(config),
       }),
     pRetryOptions,
   );
