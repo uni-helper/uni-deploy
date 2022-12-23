@@ -3,6 +3,7 @@ import pRetry from 'p-retry';
 import { MiniProgramCI } from 'miniprogram-ci/dist/@types/types';
 import { getFileField, getFileDir, getFilePath, logger } from '../utils';
 import type { UniDeployConfig, PRetryOptions } from '../types';
+import type { IInnerUploadResult as WechatUploadResult } from 'miniprogram-ci/dist/@types/ci/upload';
 
 export const mpWeixinGetConfig = (config: UniDeployConfig) => config?.['mp-weixin'];
 
@@ -90,7 +91,7 @@ export const mpWeixinUpload = async (config: UniDeployConfig, pRetryOptions?: PR
         project: mpWeixinGetProject(config),
       }),
     pRetryOptions,
-  );
+  ) as Promise<WechatUploadResult>;
 
 export const mpWeixinGetPreviewVersion = (config: UniDeployConfig) =>
   (config?.['mp-weixin']?.preview?.version ??
