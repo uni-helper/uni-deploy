@@ -30,13 +30,7 @@ yarn install @uni-helper/uni-deploy -D
 pnpm install @uni-helper/uni-deploy -D
 ```
 
-使用 `cnpm`：
-
-```shell
-cnpm install @uni-helper/uni-deploy -D
-```
-
-不考虑 `uni_modules`。
+不考虑支持 `uni_modules`。
 
 ### 配置文件
 
