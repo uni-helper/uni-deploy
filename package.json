@@ -55,19 +55,18 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "bundle-require": "^3.1.2",
     "commander": "^9.4.1",
-    "esbuild": "^0.16.12",
+    "dotenv": "^16.0.3",
+    "dotenv-expand": "^10.0.0",
     "globby": "^13.1.3",
     "got": "^12.5.3",
-    "joycon": "^3.1.1",
     "minidev": "^1.6.3",
     "miniprogram-ci": "^1.9.3",
     "p-retry": "^5.1.2",
     "picocolors": "^1.0.0",
     "pino": "^8.8.0",
     "pino-pretty": "^9.1.1",
-    "strip-json-comments": "^5.0.0"
+    "unconfig": "^0.3.7"
   },
   "devDependencies": {
     "@babel/core": "^7.20.7",
