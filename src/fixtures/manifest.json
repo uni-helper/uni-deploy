@@ -1,5 +1,8 @@
 {
   "mp-weixin": {
-    "appid": "touristappid"
+    "appid": "manifest.json appid"
+  },
+  "mp-alipay": {
+    "appid": "manifest.json appid"
   }
 }
