@@ -11,7 +11,6 @@ import type { UniDeployConfig } from './types';
 
 const pinoPrettyStream = pinoPretty({
   colorize: true,
-  levelFirst: true,
   ignore: 'pid,hostname',
   translateTime: 'SYS:standard',
 });
