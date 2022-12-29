@@ -9,7 +9,7 @@ import type {
   SpecificImNotifyPreviewBuildGotOptions,
 } from '../types';
 
-export function wecomValidate(config: UniDeployConfig) {
+export const wecomValidate = (config: UniDeployConfig) => {
   let isValid = true;
   /* webhook */
   const webhook = config?.wecom?.webhook;
@@ -18,7 +18,7 @@ export function wecomValidate(config: UniDeployConfig) {
     isValid = false;
   }
   return isValid;
-}
+};
 
 export const wecomNotifyUpload = async (
   config: UniDeployConfig,
