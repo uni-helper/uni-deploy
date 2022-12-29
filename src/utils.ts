@@ -1,4 +1,4 @@
-import { resolve, relative } from 'node:path';
+import { resolve } from 'node:path';
 import { readFileSync } from 'node:fs';
 import { globbySync } from 'globby';
 import stripJsonComments from 'strip-json-comments';
@@ -9,7 +9,7 @@ import { platforms, platformValidate } from './platform';
 import { ims, imValidate } from './im';
 import type { UniDeployConfig } from './types';
 
-export const pinoPrettyStream = pinoPretty({
+const pinoPrettyStream = pinoPretty({
   colorize: true,
   levelFirst: true,
   ignore: 'pid,hostname',
@@ -18,33 +18,12 @@ export const pinoPrettyStream = pinoPretty({
 
 export const logger = pino(pinoPrettyStream);
 
-export const globbyIgnore = ['**/node_modules', '**/dist', '**/.hbuilder', '**/.hbuilderx'];
-
-export const jsoncParse = (data: string) => {
-  try {
-    return new Function('return ' + stripJsonComments(data).trim())();
-  } catch {
-    return {};
-  }
-};
-
-export const loadJson = async (filePath: string) => {
-  try {
-    return jsoncParse(readFileSync(filePath, 'utf8'));
-  } catch (error) {
-    if (error instanceof Error) {
-      throw new Error(`Failed to parse ${relative(process.cwd(), filePath)}: ${error.message}`);
-    } else {
-      throw error;
-    }
-  }
-};
+const globbyIgnore = ['**/node_modules', '**/dist', '**/.hbuilder', '**/.hbuilderx'];
 
 export const getFileField = (
-  config: UniDeployConfig,
   filters: { entry: string | string[]; prop: string | string[] }[],
-): string | number | boolean | Array<any> | Record<string, any> => {
-  const { cwd } = config;
+  cwd = process.cwd(),
+): string | number | boolean | Array<any> | Record<string, any> | undefined => {
   const entries = globbySync(
     filters.map((f) => (Array.isArray(f.entry) ? resolve(cwd, ...f.entry) : resolve(cwd, f.entry))),
     { ignore: globbyIgnore },
@@ -55,29 +34,37 @@ export const getFileField = (
       const field = get(content, filters[index].prop);
       if (field != null) return field;
     } catch (error) {
-      return '';
+      return undefined;
     }
   }
-  return '';
+  return undefined;
 };
 
-export const getFilePath = (config: UniDeployConfig, filters: { entry: string | string[] }[]) => {
-  const { cwd } = config;
+export const getFilePath = (filters: { entry: string | string[] }[], cwd = process.cwd()) => {
   const entries = globbySync(
     filters.map((f) => (Array.isArray(f.entry) ? resolve(cwd, ...f.entry) : resolve(cwd, f.entry))),
     { ignore: globbyIgnore },
   );
-  return entries[0] ?? '';
+  return entries[0] ?? undefined;
 };
 
-export const getFileDir = (config: UniDeployConfig, filters: { entry: string | string[] }[]) => {
-  const { cwd } = config;
+export const getFileDir = (filters: { entry: string | string[] }[], cwd = process.cwd()) => {
   const entries = globbySync(
     filters.map((f) => (Array.isArray(f.entry) ? resolve(cwd, ...f.entry) : resolve(cwd, f.entry))),
     { ignore: globbyIgnore },
   );
-  return entries[0] ? resolve(entries[0], '..') : '';
+  return entries[0] ? resolve(entries[0], '..') : undefined;
 };
+
+export const getVersionField = (cwd = process.cwd()) =>
+  getFileField(
+    [
+      { entry: 'package.json', prop: 'version' },
+      { entry: ['src', 'manifest.json'], prop: ['versionName'] },
+      { entry: ['**', 'manifest.json'], prop: ['versionName'] },
+    ],
+    cwd,
+  ) as string | undefined;
 
 export const validatePlatforms = (config: UniDeployConfig) =>
   platforms.map((platform) => platformValidate(config, platform));
