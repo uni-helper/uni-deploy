@@ -9,22 +9,15 @@ import type {
   SpecificImNotifyPreviewBuildGotOptions,
 } from '../types';
 
-export const dingtalkGetConfig = (config: UniDeployConfig) => config?.dingtalk;
-
-export const dingtalkGetWebhook = (config: UniDeployConfig) => config?.dingtalk?.webhook ?? '';
-
 export const dingtalkValidate = (config: UniDeployConfig) => {
-  const dingtalkConfig = dingtalkGetConfig(config);
-  if (!dingtalkConfig) {
-    logger.info('没有配置钉钉，跳过钉钉操作。');
-    return false;
-  }
-  const webhook = dingtalkGetWebhook(config);
+  let isValid = true;
+  /* webhook */
+  const webhook = config?.dingtalk?.webhook;
   if (!webhook || (Array.isArray(webhook) && webhook.length === 0)) {
-    logger.info('没有配置钉钉机器人 webhook，跳过钉钉操作。');
-    return false;
+    logger.warn('【钉钉】缺少 webhook');
+    isValid = false;
   }
-  return true;
+  return isValid;
 };
 
 export const dingtalkNotifyUpload = async (
@@ -33,7 +26,7 @@ export const dingtalkNotifyUpload = async (
   result: Promise<any> | any,
   buildGotOptions?: SpecificImNotifyUploadBuildGotOptions,
 ) => {
-  const webhook = dingtalkGetWebhook(config);
+  const webhook = config?.dingtalk?.webhook as string | string[];
   const res = await result;
   const gotOptions: GotOptions = {
     method: 'POST',
@@ -56,7 +49,7 @@ export const dingtalkNotifyPreview = async (
   result: Promise<any> | any,
   buildGotOptions?: SpecificImNotifyPreviewBuildGotOptions,
 ) => {
-  const webhook = dingtalkGetWebhook(config);
+  const webhook = config?.dingtalk?.webhook as string | string[];
   const res = await result;
   const gotOptions: GotOptions = {
     method: 'POST',

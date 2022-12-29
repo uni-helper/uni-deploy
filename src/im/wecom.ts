@@ -9,22 +9,15 @@ import type {
   SpecificImNotifyPreviewBuildGotOptions,
 } from '../types';
 
-export const wecomGetConfig = (config: UniDeployConfig) => config?.wecom;
-
-export const wecomGetWebhook = (config: UniDeployConfig) => config?.wecom?.webhook ?? '';
-
 export function wecomValidate(config: UniDeployConfig) {
-  const wecomConfig = wecomGetConfig(config);
-  if (!wecomConfig) {
-    logger.info('没有配置企业微信，跳过企业微信操作。');
-    return false;
-  }
-  const webhook = wecomGetWebhook(config);
+  let isValid = true;
+  /* webhook */
+  const webhook = config?.wecom?.webhook;
   if (!webhook || (Array.isArray(webhook) && webhook.length === 0)) {
-    logger.info('没有配置企业微信机器人 webhook，跳过企业微信操作。');
-    return false;
+    logger.warn('【企业微信】缺少 webhook');
+    isValid = false;
   }
-  return true;
+  return isValid;
 }
 
 export const wecomNotifyUpload = async (
@@ -33,7 +26,7 @@ export const wecomNotifyUpload = async (
   result: Promise<any> | any,
   buildGotOptions?: SpecificImNotifyUploadBuildGotOptions,
 ) => {
-  const webhook = wecomGetWebhook(config);
+  const webhook = config?.wecom?.webhook as string | string[];
   const res = await result;
   const gotOptions: GotOptions = {
     method: 'POST',
@@ -56,7 +49,7 @@ export const wecomNotifyPreview = async (
   result: Promise<any> | any,
   buildGotOptions?: SpecificImNotifyPreviewBuildGotOptions,
 ) => {
-  const webhook = wecomGetWebhook(config);
+  const webhook = config?.wecom?.webhook as string | string[];
   const res = await result;
   const gotOptions: GotOptions = {
     method: 'POST',
