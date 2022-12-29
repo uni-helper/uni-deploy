@@ -15,7 +15,7 @@ export interface MpWeixinConfig {
   projectPath?: string;
   /** 建议在 .env 或 process.env 设置 MP_WEIXIN_PRIVATE_KEY */
   privateKey?: string;
-  /** @deprecated 不建议使用，对应 MP_WEIXIN_PRIVATE_KEY_PATH */
+  /** @deprecated 不建议在 .env 或 process.env 设置 MP_WEIXIN_PRIVATE_KEY_PATH */
   privateKeyPath?: string;
   /** 默认为 miniProgram */
   type?: Wechat.ProjectType;
@@ -51,6 +51,7 @@ export interface MpWeixinConfig {
   searchQuery?: string;
   /** 默认值 1011，具体含义见 https://developers.weixin.qq.com/miniprogram/dev/reference/scene-list.html */
   scene?: number;
+  test?: boolean;
 }
 export interface MpAlipayConfig {
   /**
