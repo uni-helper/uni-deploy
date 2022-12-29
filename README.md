@@ -4,7 +4,7 @@
 
 [![npm](https://img.shields.io/npm/v/@uni-helper/uni-deploy)](https://www.npmjs.com/package/@uni-helper/uni-deploy)
 
-支持在脚本文件和 CI/CD 中调用以自动部署 `uni-app` 应用。
+自动化部署 `uni-app` 应用。
 
 ## 起步
 
