@@ -14,7 +14,7 @@ import type {
 export * from './dingtalk';
 export * from './wecom';
 
-export const ims: Im[] = ['wecom'];
+export const ims: Im[] = ['dingtalk', 'wecom'];
 
 export const imValidateMap: ImValidateMap = {
   wecom: wecomValidate,
