@@ -39,6 +39,7 @@ specifiers:
   pino-pretty: ^9.1.1
   prettier: ^2.8.1
   release-it: ^15.6.0
+  strip-json-comments: ^5.0.0
   ts-node: ^10.9.1
   tsup: ^6.5.0
   tsx: ^3.12.1
@@ -59,6 +60,7 @@ dependencies:
   picocolors: 1.0.0
   pino: 8.8.0
   pino-pretty: 9.1.1
+  strip-json-comments: 5.0.0
   unconfig: 0.3.7
 
 devDependencies:
@@ -12164,6 +12166,11 @@ packages:
   /strip-json-comments/3.1.1:
     resolution: {integrity: sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==}
     engines: {node: '>=8'}
+
+  /strip-json-comments/5.0.0:
+    resolution: {integrity: sha512-V1LGY4UUo0jgwC+ELQ2BNWfPa17TIuwBLg+j1AA/9RPzKINl1lhxVEu2r+ZTTO8aetIsUzE5Qj6LMSBkoGYKKw==}
+    engines: {node: '>=14.16'}
+    dev: false
 
   /strip-literal/1.0.0:
     resolution: {integrity: sha512-5o4LsH1lzBzO9UFH63AJ2ad2/S2AVx6NtjOcaz+VTT2h1RiRvbipW72z8M/lxEhcPHDBQwpDrnTF7sXy/7OwCQ==}
