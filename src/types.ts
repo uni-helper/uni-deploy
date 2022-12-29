@@ -13,9 +13,9 @@ export interface MpWeixinConfig {
   appid?: string;
   /** 会尝试搜索 project.config.json 并将其目录作为默认值 */
   projectPath?: string;
-  /** 建议在 .env 或 process.env 设置 MP_WEIXIN_PRIVATE_KEY */
+  /** @deprecated 不建议使用，建议在 .env 或 process.env 设置 MP_WEIXIN_PRIVATE_KEY */
   privateKey?: string;
-  /** @deprecated 不建议在 .env 或 process.env 设置 MP_WEIXIN_PRIVATE_KEY_PATH */
+  /** @deprecated 不建议使用，建议在 .env 或 process.env 设置 MP_WEIXIN_PRIVATE_KEY_PATH */
   privateKeyPath?: string;
   /** 默认为 miniProgram */
   type?: Wechat.ProjectType;
@@ -61,9 +61,9 @@ export interface MpAlipayConfig {
   appid?: string;
   /** 会尝试搜索 mini.project.json 并将其目录作为默认值 */
   projectPath?: string;
-  /** @deprecated 建议在 .env 或 process.env 设置 MP_ALIPAY_PRIVATE_KEY */
+  /** @deprecated 不建议使用，建议在 .env 或 process.env 设置 MP_ALIPAY_PRIVATE_KEY */
   privateKey?: string;
-  /** @deprecated 建议在 .env 或 process.env 设置 MP_ALIPAY_TOOL_ID */
+  /** @deprecated 不建议使用，建议在 .env 或 process.env 设置 MP_ALIPAY_TOOL_ID */
   toolId?: string;
   /** 端类型 */
   clientType?: string;
