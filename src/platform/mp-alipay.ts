@@ -10,7 +10,7 @@ export const mpAlipayValidate = (config: UniDeployConfig) => {
   /* appid */
   const appid = config?.['mp-alipay']?.appid;
   if (!appid) {
-    logger.info('【支付宝小程序】缺少 appid');
+    logger.warn('【支付宝小程序】缺少 appid');
     isValid = false;
   }
   /* projectPath */

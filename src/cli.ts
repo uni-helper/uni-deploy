@@ -16,8 +16,6 @@ program
     const config = await loadConfig();
     validatePlatforms(config);
     validateIms(config);
-    // 结束
-    logger.info('检查操作结束。');
   });
 
 program
