@@ -4,7 +4,7 @@
 
 [![npm](https://img.shields.io/npm/v/@uni-helper/uni-deploy)](https://www.npmjs.com/package/@uni-helper/uni-deploy)
 
-自动化部署 `uni-app` 应用。
+自动化部署 `uni-app` 应用。要求 `node >= 14.18`。
 
 ## 起步
 
