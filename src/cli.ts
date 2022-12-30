@@ -1,11 +1,14 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
+import updateNotifier from 'update-notifier';
 import pkg from '../package.json';
 import { loadConfig } from './config';
 import { imNotifyPreview, imNotifyUpload } from './im';
 import { platformPreview, platformUpload } from './platform';
 import { logger, validatePlatforms, validateIms } from './utils';
 import type { Im, Platform } from './types';
+
+updateNotifier({ pkg }).notify();
 
 const program = new Command(pkg.name).version(pkg.version).description(pkg.description);
 
