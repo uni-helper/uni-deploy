@@ -7,7 +7,7 @@ specifiers:
   '@commitlint/config-conventional': ^17.3.0
   '@commitlint/prompt': ^17.3.0
   '@modyqyw/fabric': ^5.14.0
-  '@modyqyw/utils': ^3.0.3
+  '@modyqyw/utils': ^3.0.5
   '@tsconfig/node18': ^1.0.1
   '@types/lodash': ^4.14.191
   '@types/lodash-es': ^4.17.6
@@ -74,7 +74,7 @@ devDependencies:
   '@commitlint/config-conventional': 17.3.0
   '@commitlint/prompt': 17.3.0
   '@modyqyw/fabric': 5.14.0_crnjwcwerrbat3mlbmrsoa543e
-  '@modyqyw/utils': 3.0.3_typescript@4.9.4
+  '@modyqyw/utils': 3.0.5_typescript@4.9.4
   '@tsconfig/node18': 1.0.1
   '@types/lodash': 4.14.191
   '@types/lodash-es': 4.17.6
@@ -2615,13 +2615,12 @@ packages:
       - svelte
     dev: true
 
-  /@modyqyw/utils/3.0.3_typescript@4.9.4:
-    resolution: {integrity: sha512-7pLJdmDBkYTVJvaezq2hBjTPimk+mMOEirospvU4bnAMYY0lAPyEU6exicok35BVKoBKNxkjEwl7SIIDTJPfHQ==}
+  /@modyqyw/utils/3.0.5_typescript@4.9.4:
+    resolution: {integrity: sha512-Ykog677FYj/eC1QQINUA0uMBhQ+GtOHL/iYE1N/J6tmjGZ70Ya48o3ZoKg65NrHGHGGyDCcKYJynPSrsIj/EdQ==}
     engines: {node: '>=14.18'}
     dependencies:
       '@rollup/plugin-commonjs': 24.0.0_rollup@3.9.1
       '@rollup/plugin-json': 6.0.0_rollup@3.9.1
-      '@rollup/plugin-multi-entry': 6.0.0_rollup@3.9.1
       '@rollup/plugin-node-resolve': 15.0.1_rollup@3.9.1
       '@rollup/plugin-terser': 0.2.1_rollup@3.9.1
       '@sindresorhus/is': 5.3.0
@@ -2857,20 +2856,6 @@ packages:
       rollup: 3.9.1
     dev: true
 
-  /@rollup/plugin-multi-entry/6.0.0_rollup@3.9.1:
-    resolution: {integrity: sha512-msBgVncGQwh/ahxeP/rc8MXVZNBOjoVCsBuDk6uqyFzDv/SZN7jksfAsu6DJ2w4r5PaBX3/OXOjVPeCxya2waA==}
-    engines: {node: '>=14.0.0'}
-    peerDependencies:
-      rollup: ^1.20.0||^2.0.0||^3.0.0
-    peerDependenciesMeta:
-      rollup:
-        optional: true
-    dependencies:
-      '@rollup/plugin-virtual': 3.0.1_rollup@3.9.1
-      matched: 5.0.1
-      rollup: 3.9.1
-    dev: true
-
   /@rollup/plugin-node-resolve/15.0.1_rollup@3.9.1:
     resolution: {integrity: sha512-ReY88T7JhJjeRVbfCyNj+NXAG3IIsVMsX9b5/9jC98dRP8/yxlZdz7mHZbHk5zHr24wZZICS5AcXsFZAXYUQEg==}
     engines: {node: '>=14.0.0'}
@@ -2902,18 +2887,6 @@ packages:
       serialize-javascript: 6.0.0
       smob: 0.0.6
       terser: 5.16.1
-    dev: true
-
-  /@rollup/plugin-virtual/3.0.1_rollup@3.9.1:
-    resolution: {integrity: sha512-fK8O0IL5+q+GrsMLuACVNk2x21g3yaw+sG2qn16SnUd3IlBsQyvWxLMGHmCmXRMecPjGRSZ/1LmZB4rjQm68og==}
-    engines: {node: '>=14.0.0'}
-    peerDependencies:
-      rollup: ^1.20.0||^2.0.0||^3.0.0
-    peerDependenciesMeta:
-      rollup:
-        optional: true
-    dependencies:
-      rollup: 3.9.1
     dev: true
 
   /@rollup/pluginutils/5.0.2_rollup@3.9.1:
@@ -9393,14 +9366,6 @@ packages:
     engines: {node: '>=14'}
     dependencies:
       markdown-it: 13.0.1
-    dev: true
-
-  /matched/5.0.1:
-    resolution: {integrity: sha512-E1fhSTPRyhAlNaNvGXAgZQlq1hL0bgYMTk/6bktVlIhzUnX/SZs7296ACdVeNJE8xFNGSuvd9IpI7vSnmcqLvw==}
-    engines: {node: '>=10'}
-    dependencies:
-      glob: 7.2.3
-      picomatch: 2.3.1
     dev: true
 
   /maxmin/2.1.0:
