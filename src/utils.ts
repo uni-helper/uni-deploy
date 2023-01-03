@@ -5,9 +5,6 @@ import stripJsonComments from 'strip-json-comments';
 import { get } from 'lodash-unified';
 import pino from 'pino';
 import pinoPretty from 'pino-pretty';
-import { platforms, platformValidate } from './platform';
-import { ims, imValidate } from './im';
-import type { UniDeployConfig } from './types';
 
 const pinoPrettyStream = pinoPretty({
   colorize: true,
@@ -64,8 +61,3 @@ export const getVersionField = (cwd = process.cwd()) =>
     ],
     cwd,
   ) as string | undefined;
-
-export const validatePlatforms = (config: UniDeployConfig) =>
-  platforms.map((platform) => platformValidate(config, platform));
-
-export const validateIms = (config: UniDeployConfig) => ims.map((im) => imValidate(config, im));

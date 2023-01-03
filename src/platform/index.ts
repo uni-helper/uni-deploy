@@ -41,6 +41,9 @@ export const platformPreviewMap: PlatformPreviewMap = {
 export const platformValidate: PlatformValidate = (config: UniDeployConfig, platform: Platform) =>
   platformValidateMap[platform](config);
 
+export const platformsValidate = (config: UniDeployConfig) =>
+  platforms.map((platform) => platformValidate(config, platform));
+
 export const platformUpload: PlatformUpload = (
   config: UniDeployConfig,
   platform: Platform,

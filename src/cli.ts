@@ -3,9 +3,9 @@ import { Command } from 'commander';
 import updateNotifier from 'update-notifier';
 import pkg from '../package.json';
 import { loadConfig } from './config';
-import { imNotifyPreview, imNotifyUpload } from './im';
-import { platformPreview, platformUpload } from './platform';
-import { logger, validatePlatforms, validateIms } from './utils';
+import { imsValidate, imNotifyPreview, imNotifyUpload } from './im';
+import { platformsValidate, platformPreview, platformUpload } from './platform';
+import { logger } from './utils';
 import type { Im, Platform } from './types';
 
 updateNotifier({ pkg }).notify();
@@ -17,8 +17,8 @@ program
   .description('检查配置文件')
   .action(async () => {
     const config = await loadConfig();
-    validatePlatforms(config);
-    validateIms(config);
+    platformsValidate(config);
+    imsValidate(config);
   });
 
 program
@@ -27,8 +27,8 @@ program
   .action(async () => {
     const config = await loadConfig();
     // 检查
-    const validatePlatformsResults = validatePlatforms(config);
-    const validateImsResults = validateIms(config);
+    const validatePlatformsResults = platformsValidate(config);
+    const validateImsResults = imsValidate(config);
     // 只处理配置正确的平台
     const platforms = Object.keys(config.platform ?? {}).filter(
       (_, index) => validatePlatformsResults[index],
@@ -57,8 +57,8 @@ program
   .action(async () => {
     const config = await loadConfig();
     // 检查
-    const validatePlatformsResults = validatePlatforms(config);
-    const validateImsResults = validateIms(config);
+    const validatePlatformsResults = platformsValidate(config);
+    const validateImsResults = imsValidate(config);
     // 只处理配置正确的平台
     const platforms = Object.keys(config.platform ?? {}).filter(
       (_, index) => validatePlatformsResults[index],

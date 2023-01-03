@@ -34,6 +34,8 @@ export const imNotifyPreviewMap: ImNotifyPreviewMap = {
 export const imValidate: ImValidate = (config: UniDeployConfig, im: Im) =>
   imValidateMap[im](config);
 
+export const imsValidate = (config: UniDeployConfig) => ims.map((im) => imValidate(config, im));
+
 export const imNotifyUpload: ImNotifyUpload = (config, im, platform, result, buildGotOptions) =>
   imNotifyUploadMap[im](
     config,
