@@ -7,7 +7,7 @@ specifiers:
   '@commitlint/config-conventional': ^17.3.0
   '@commitlint/prompt': ^17.3.0
   '@modyqyw/fabric': ^5.14.0
-  '@modyqyw/utils': ^3.0.5
+  '@modyqyw/utils': ^3.0.6
   '@tsconfig/node18': ^1.0.1
   '@types/lodash': ^4.14.191
   '@types/lodash-es': ^4.17.6
@@ -73,7 +73,7 @@ devDependencies:
   '@commitlint/config-conventional': 17.3.0
   '@commitlint/prompt': 17.3.0
   '@modyqyw/fabric': 5.14.0_crnjwcwerrbat3mlbmrsoa543e
-  '@modyqyw/utils': 3.0.5_typescript@4.9.4
+  '@modyqyw/utils': 3.0.6_typescript@4.9.4
   '@tsconfig/node18': 1.0.1
   '@types/lodash': 4.14.191
   '@types/lodash-es': 4.17.6
@@ -2613,8 +2613,8 @@ packages:
       - svelte
     dev: true
 
-  /@modyqyw/utils/3.0.5_typescript@4.9.4:
-    resolution: {integrity: sha512-Ykog677FYj/eC1QQINUA0uMBhQ+GtOHL/iYE1N/J6tmjGZ70Ya48o3ZoKg65NrHGHGGyDCcKYJynPSrsIj/EdQ==}
+  /@modyqyw/utils/3.0.6_typescript@4.9.4:
+    resolution: {integrity: sha512-VOWJL8rUiEbRqJoWWevyjDRxnnwIlsKzvh/V04o2lY+PRpf1S2RhNUe66BSA+DSWBQzPb592MEtG6t6yM1H6tg==}
     engines: {node: '>=14.18'}
     dependencies:
       '@rollup/plugin-commonjs': 24.0.0_rollup@3.9.1
@@ -3531,7 +3531,7 @@ packages:
     resolution: {integrity: sha512-IG23inYII3dWlU2EyiAiGj6Bwal5GzsgPMwjYGvc1HPE2dgbj4ZB5ToWBKSquKw74nB3TIuOwaI6/jSULzfgrw==}
     engines: {node: '>=14.16'}
     dependencies:
-      type-fest: 3.4.0
+      type-fest: 3.5.0
     dev: true
 
   /ansi-regex/2.1.1:
@@ -11329,7 +11329,7 @@ packages:
   /read-package-json/2.1.2:
     resolution: {integrity: sha512-D1KmuLQr6ZSJS0tW8hf3WGpRlwszJOXZ3E8Yd/DNRaM5d+1wVRZdHlpGBLAuovjr28LbWvjpWkBHMxpRGGjzNA==}
     dependencies:
-      glob: 7.1.2
+      glob: 7.2.3
       json-parse-even-better-errors: 2.3.1
       normalize-package-data: 2.5.0
       npm-normalize-package-bin: 1.0.1
@@ -13073,11 +13073,6 @@ packages:
   /type-fest/2.19.0:
     resolution: {integrity: sha512-RAH822pAdBgcNMAfWnCBU3CFZcfZ/i1eZjwFU/dsLKumyuuP3niueg2UAukXYF0E2AAoc82ZSSf9J0WQBinzHA==}
     engines: {node: '>=12.20'}
-
-  /type-fest/3.4.0:
-    resolution: {integrity: sha512-PEPg6RHlB9cFwoTMNENNrQFL0cXX04voWr2UPwQBJ3pVs7Mt8Y1oLWdUeMdGEwZE8HFFlujq8gS9enmyiQ8pLg==}
-    engines: {node: '>=14.16'}
-    dev: true
 
   /type-fest/3.5.0:
     resolution: {integrity: sha512-bI3zRmZC8K0tUz1HjbIOAGQwR2CoPQG68N5IF7gm0LBl8QSNXzkmaWnkWccCUL5uG9mCsp4sBwC8SBrNSISWew==}
