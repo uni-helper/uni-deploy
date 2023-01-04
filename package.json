@@ -26,11 +26,10 @@
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs",
       "types": "./dist/index.d.ts"
     }
   },
-  "main": "./dist/index.cjs",
+  "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "bin": {
@@ -75,7 +74,7 @@
     "@commitlint/config-conventional": "^17.3.0",
     "@commitlint/prompt": "^17.3.0",
     "@modyqyw/fabric": "^5.14.0",
-    "@modyqyw/utils": "^3.0.6",
+    "@modyqyw/utils": "^3.0.7",
     "@tsconfig/node18": "^1.0.1",
     "@types/lodash": "^4.14.191",
     "@types/lodash-es": "^4.17.6",
