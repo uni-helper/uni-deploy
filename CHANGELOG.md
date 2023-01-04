@@ -1,6 +1,6 @@
 # 改动日志
 
-## Unreleased
+## 0.2.2 (2023-01-04)
 
 - build: 使用 `rollup` 打包
 - perf: 优化循环引用
