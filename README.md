@@ -260,7 +260,7 @@ export interface WecomConfig extends ImConfig {
 
 ### 脚本调用
 
-你可以从 `@uni-helper/uni-deploy` 导入各种方法来组合使用。CLI 只是提供了更便捷的方式操作。
+你可以从 `@uni-helper/uni-deploy` 导入各种方法来组合使用。CLI 只是提供了更便捷的方式操作。但请注意，你需要使用 ESM 语法来操作。
 
 ```typescript
 import {...} from '@uni-helper/uni-deploy';
