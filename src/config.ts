@@ -1,5 +1,4 @@
 import { loadConfig as _loadConfig } from 'unconfig';
-import { sourcePackageJsonFields } from 'unconfig/presets';
 import dotenv from 'dotenv';
 import dotenvExpand from 'dotenv-expand';
 import { getFileDir, getFileField, getVersionField } from './utils';
@@ -37,7 +36,7 @@ export const loadConfig = async (inlineConfig: UniDeployUserConfig = {}, cwd = p
   const envConfig = loadEnvConfig();
   const { config: loadedConfig = {} } = await _loadConfig<UniDeployUserConfig>({
     cwd,
-    sources: [{ files: 'uni-deploy.config' }, sourcePackageJsonFields({ fields: 'uni-deploy' })],
+    sources: [{ files: 'uni-deploy.config', extensions: ['ts', 'mts', 'cts', 'js', 'mjs', 'cjs'] }],
     merge: true,
   });
   const resolved: UniDeployConfig = {

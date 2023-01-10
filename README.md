@@ -42,8 +42,6 @@ pnpm install @uni-helper/uni-deploy -D
 - `uni-deploy.config.js`
 - `uni-deploy.config.mjs`
 - `uni-deploy.config.cjs`
-- `uni-deploy.config.json`
-- `package.json` 中的 `uni-deploy` 字段内容
 
 借助 [unconfig](https://github.com/antfu/unconfig) 的帮助，以上配置文件的内容会被读取并合并，最终合并后的内容会作为你提供的 `uni-deploy` 的配置。
 
