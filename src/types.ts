@@ -9,25 +9,34 @@ export { PRetryOptions, GotOptions };
 export type Platform = 'mp-weixin' | 'mp-alipay';
 export type PlatformTextMap = Record<Platform, string>;
 export interface MpWeixinConfig {
-  /** 会尝试搜索 project.config.json 和 manifest.json 并将其中微信小程序字段的 appid 作为默认值 */
+  /** 项目 appid，会尝试搜索 project.config.json 和 manifest.json 并将其中微信小程序字段的 appid 作为默认值 */
   appid?: string;
-  /** 会尝试搜索 project.config.json 并将其目录作为默认值 */
+  /** 项目路径，会尝试搜索 project.config.json 并将其目录作为默认值 */
   projectPath?: string;
-  /** @deprecated 不建议使用，建议在 .env 或 process.env 设置 MP_WEIXIN_PRIVATE_KEY */
+  /**
+   * 请阅读 https://developers.weixin.qq.com/miniprogram/dev/devtools/ci.html
+   *
+   * @deprecated 不建议使用，建议在 .env 或 process.env 设置 MP_WEIXIN_PRIVATE_KEY
+   */
   privateKey?: string;
-  /** @deprecated 不建议使用，建议在 .env 或 process.env 设置 MP_WEIXIN_PRIVATE_KEY_PATH */
+  /**
+   * 请阅读 https://developers.weixin.qq.com/miniprogram/dev/devtools/ci.html
+   *
+   * @deprecated 不建议使用，建议在 .env 或 process.env 设置 MP_WEIXIN_PRIVATE_KEY_PATH
+   */
   privateKeyPath?: string;
-  /** 默认为 miniProgram */
+  /** 项目类型，默认为 miniProgram */
   type?: Wechat.ProjectType;
+  /** 需要排除的路径 */
   ignores?: string[];
   /**
-   * 会尝试搜索 package.json 和 manifest.json，并将 version (package.json) 或 versionName (manifest.json)
+   * 项目版本，会尝试搜索 package.json 和 manifest.json，并将 version (package.json) 或 versionName (manifest.json)
    * 作为默认值
    */
   version?: string;
-  /** 会尝试搜索 project.config.json，并将 setting 作为默认值 */
+  /** 编译设置，会尝试搜索 project.config.json，并将 setting 作为默认值 */
   setting?: Wechat.ICompileSettings;
-  /** 默认为 Handled by uni-deploy */
+  /** 备注，默认为 Handled by uni-deploy */
   desc?: string;
   /** 使用的机器人，可选 1 - 30 */
   robot?: number;
@@ -55,22 +64,32 @@ export interface MpWeixinConfig {
 }
 export interface MpAlipayConfig {
   /**
-   * 会尝试搜索 mini.project.json 和 manifest.json，并将 appid (mini.project.json) 或 mp-alipay.appid
+   * 项目 appid，会尝试搜索 mini.project.json 和 manifest.json，并将 appid (mini.project.json) 或 mp-alipay.appid
    * (manifest.json) 作为默认值
+   *
+   * 请注意，这里跟随微信小程序使用 appid，而并非 appId
    */
   appid?: string;
-  /** 会尝试搜索 mini.project.json 并将其目录作为默认值 */
+  /** 项目路径，会尝试搜索 mini.project.json 并将其目录作为默认值 */
   projectPath?: string;
-  /** @deprecated 不建议使用，建议在 .env 或 process.env 设置 MP_ALIPAY_PRIVATE_KEY */
+  /**
+   * 请阅读 https://opendocs.alipay.com/mini/02q29w
+   *
+   * @deprecated 不建议使用，建议在 .env 或 process.env 设置 MP_ALIPAY_PRIVATE_KEY
+   */
   privateKey?: string;
-  /** @deprecated 不建议使用，建议在 .env 或 process.env 设置 MP_ALIPAY_TOOL_ID */
+  /**
+   * 请阅读 https://opendocs.alipay.com/mini/02q29w
+   *
+   * @deprecated 不建议使用，建议在 .env 或 process.env 设置 MP_ALIPAY_TOOL_ID
+   */
   toolId?: string;
   /** 端类型 */
   clientType?: string;
   /** 开放平台 bundleId, 此项会覆盖 clientType 的效果 */
   bundleId?: string;
   /**
-   * 会尝试搜索 package.json 和 manifest.json，并将 version (package.json) 或 versionName (manifest.json)
+   * 项目版本，会尝试搜索 package.json 和 manifest.json，并将 version (package.json) 或 versionName (manifest.json)
    * 作为默认值
    */
   version?: string;
@@ -217,10 +236,15 @@ export interface SpecificImNotifyPreview {
 export type ImNotifyPreviewMap = Record<Im, SpecificImNotifyPreview>;
 
 export interface UniDeployConfig {
+  /** 进程的当前工作目录，默认为 process.cwd() */
   cwd: string;
+  /** 微信小程序配置 */
   'mp-weixin'?: MpWeixinConfig;
+  /** 支付宝小程序配置 */
   'mp-alipay'?: MpAlipayConfig;
+  /** 钉钉配置 */
   dingtalk?: DingtalkConfig;
+  /** 企业微信配置 */
   wecom?: WecomConfig;
   [key: string]: any;
 }
