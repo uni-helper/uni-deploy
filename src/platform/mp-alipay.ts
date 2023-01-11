@@ -1,6 +1,6 @@
 import * as _mindev from 'minidev';
 import pRetry from 'p-retry';
-import { PRetryOptions, UniDeployConfig } from 'src/types';
+import { PRetryOptions, UniDeployConfig } from '../types';
 import { logger } from '../utils';
 
 const { minidev, useDefaults } = _mindev;
