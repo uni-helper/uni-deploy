@@ -1,5 +1,9 @@
 # 改动日志
 
+## Unreleased
+
+- build: 切换为 `unbuild`
+
 ## 0.3.0 (2023-01-10)
 
 - feat!: 移除 `uni-deploy.config.json` 和 `package.json` 内 `uni-deploy` 字段的配置支持
