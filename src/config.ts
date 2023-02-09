@@ -1,9 +1,9 @@
 import { loadConfig as _loadConfig } from 'unconfig';
 import dotenv from 'dotenv';
 import dotenvExpand from 'dotenv-expand';
+import type { MiniProgramCI as Wechat } from 'miniprogram-ci/dist/@types/types';
 import { getFileDir, getFileField, getVersionField } from './utils';
 import type { UniDeployConfig, UniDeployUserConfig } from './types';
-import type { MiniProgramCI as Wechat } from 'miniprogram-ci/dist/@types/types';
 
 export const defaultConfig: UniDeployConfig = {
   cwd: process.cwd(),

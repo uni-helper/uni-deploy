@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 import { Command } from 'commander';
 import updateNotifier from 'update-notifier';
 import pkg from '../package.json';

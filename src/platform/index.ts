@@ -1,5 +1,3 @@
-import { mpWeixinUpload, mpWeixinPreview, mpWeixinValidate } from './mp-weixin';
-import { mpAlipayUpload, mpAlipayPreview, mpAlipayValidate } from './mp-alipay';
 import type {
   UniDeployConfig,
   PRetryOptions,
@@ -12,6 +10,8 @@ import type {
   PlatformUpload,
   PlatformPreview,
 } from '../types';
+import { mpWeixinUpload, mpWeixinPreview, mpWeixinValidate } from './mp-weixin';
+import { mpAlipayUpload, mpAlipayPreview, mpAlipayValidate } from './mp-alipay';
 
 export * from './mp-weixin';
 export * from './mp-alipay';

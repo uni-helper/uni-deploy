@@ -1,5 +1,3 @@
-import { dingtalkNotifyUpload, dingtalkNotifyPreview, dingtalkValidate } from './dingtalk';
-import { wecomNotifyUpload, wecomNotifyPreview, wecomValidate } from './wecom';
 import type {
   UniDeployConfig,
   Im,
@@ -10,6 +8,8 @@ import type {
   ImNotifyPreview,
   ImValidate,
 } from '../types';
+import { dingtalkNotifyUpload, dingtalkNotifyPreview, dingtalkValidate } from './dingtalk';
+import { wecomNotifyUpload, wecomNotifyPreview, wecomValidate } from './wecom';
 
 export * from './dingtalk';
 export * from './wecom';

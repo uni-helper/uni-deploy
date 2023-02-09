@@ -2,7 +2,7 @@ import { resolve } from 'node:path';
 import { readFileSync } from 'node:fs';
 import { globbySync } from 'globby';
 import stripJsonComments from 'strip-json-comments';
-import { get } from 'lodash-unified';
+import { get } from 'lodash-es';
 import pino from 'pino';
 import pinoPretty from 'pino-pretty';
 
@@ -26,10 +26,10 @@ export const getFileField = (
   );
   for (const [index, entry] of entries.entries()) {
     try {
-      const content = JSON.parse(stripJsonComments(readFileSync(entry, 'utf-8')));
+      const content = JSON.parse(stripJsonComments(readFileSync(entry, 'utf8')));
       const field = get(content, filters[index].prop);
       if (field != null) return field;
-    } catch (error) {
+    } catch {
       return undefined;
     }
   }

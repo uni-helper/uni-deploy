@@ -1,11 +1,11 @@
-import { existsSync } from 'fs';
+import { existsSync } from 'node:fs';
 import ci from 'miniprogram-ci';
 import pRetry from 'p-retry';
 import { ICreateProjectOptions as WechatCreateProjectOptions } from 'miniprogram-ci/dist/@types/ci/project';
 import { IInnerUploadOptions as WechatUploadOptions } from 'miniprogram-ci/dist/@types/ci/upload';
+import type { IInnerUploadResult as WechatUploadResult } from 'miniprogram-ci/dist/@types/ci/upload';
 import { logger } from '../utils';
 import type { UniDeployConfig, PRetryOptions } from '../types';
-import type { IInnerUploadResult as WechatUploadResult } from 'miniprogram-ci/dist/@types/ci/upload';
 
 export const mpWeixinValidate = (config: UniDeployConfig) => {
   let isValid = true;

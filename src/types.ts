@@ -4,8 +4,6 @@ import type { EBuildTarget as AlipayBuildTarget } from 'minidev';
 import type { Options as PRetryOptions } from 'p-retry';
 import type { ExtendOptions as GotOptions } from 'got';
 
-export { PRetryOptions, GotOptions };
-
 export type Platform = 'mp-weixin' | 'mp-alipay';
 export type PlatformTextMap = Record<Platform, string>;
 export interface MpWeixinConfig {
@@ -249,3 +247,6 @@ export interface UniDeployConfig {
   [key: string]: any;
 }
 export interface UniDeployUserConfig extends Partial<UniDeployConfig> {}
+
+export { type Options as PRetryOptions } from 'p-retry';
+export { type ExtendOptions as GotOptions } from 'got';
