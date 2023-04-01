@@ -36,7 +36,7 @@ specifiers:
   p-retry: ^5.1.2
   picocolors: ^1.0.0
   pino: ^8.10.0
-  pino-pretty: ^9.2.0
+  pino-pretty: ^10.0.0
   prettier: ^2.8.4
   strip-json-comments: ^5.0.0
   ts-node: ^10.9.1
@@ -59,7 +59,7 @@ dependencies:
   p-retry: 5.1.2
   picocolors: 1.0.0
   pino: 8.10.0
-  pino-pretty: 9.2.0
+  pino-pretty: 10.0.0
   strip-json-comments: 5.0.0
   unconfig: 0.3.7
   update-notifier: 6.0.2
@@ -2680,7 +2680,7 @@ packages:
       '@intlify/eslint-plugin-vue-i18n': 2.0.0_eslint@8.34.0
       '@rushstack/eslint-patch': 1.2.0
       '@types/eslint': 8.21.1
-      '@types/node': 18.13.0
+      '@types/node': 18.15.11
       '@types/prettier': 2.7.2
       '@typescript-eslint/eslint-plugin': 5.52.0_6cfvjsbua5ptj65675bqcn6oza
       '@typescript-eslint/parser': 5.52.0_7kw3g6rralp5ps6mg3uyzz6azm
@@ -3016,7 +3016,7 @@ packages:
   /@types/keyv/3.1.4:
     resolution: {integrity: sha512-BQ5aZNSCpj7D6K2ksrRCTmKRLEpnPvWDiLPfoGyhZ++8YtiK9d/3DBKPJgry359X/P1PfruyYwvnvwFjuEiEIg==}
     dependencies:
-      '@types/node': 18.13.0
+      '@types/node': 18.15.11
     dev: false
 
   /@types/lodash-es/4.17.6:
@@ -3045,6 +3045,10 @@ packages:
 
   /@types/node/18.13.0:
     resolution: {integrity: sha512-gC3TazRzGoOnoKAhUx+Q0t8S9Tzs74z7m0ipwGpSqQrleP14hKxP4/JUeEQcD3W1/aIpnWl8pHowI7WokuZpXg==}
+    dev: true
+
+  /@types/node/18.15.11:
+    resolution: {integrity: sha512-E5Kwq2n4SbMzQOn6wnmBjuK9ouqlURrcZDVfbo9ftDDTFt3nk7ZKK4GMOzoYgnpQJKcxwQw+lGaBvvlMo0qN/Q==}
 
   /@types/normalize-package-data/2.4.1:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==}
@@ -3061,7 +3065,7 @@ packages:
   /@types/responselike/1.0.0:
     resolution: {integrity: sha512-85Y2BjiufFzaMIlvJDvTTB8Fxl2xfLo4HgmHzVBz08w4wDePCTjYw66PdrolO0kzli3yam/YCgRufyo1DdQVTA==}
     dependencies:
-      '@types/node': 18.13.0
+      '@types/node': 18.15.11
     dev: false
 
   /@types/retry/0.12.1:
@@ -10247,8 +10251,8 @@ packages:
       split2: 4.1.0
     dev: false
 
-  /pino-pretty/9.2.0:
-    resolution: {integrity: sha512-7CeszmFqrUD08+JvtYcFXowNE7duFlE1XScmR41qTMbwQOhn7gijYYrRb5udH+z8xq4+A8vN8rQNYVPCTfzmGw==}
+  /pino-pretty/10.0.0:
+    resolution: {integrity: sha512-zKFjYXBzLaLTEAN1ayKpHXtL5UeRQC7R3lvhKe7fWs7hIVEjKGG/qIXwQt9HmeUp71ogUd/YcW+LmMwRp4KT6Q==}
     hasBin: true
     dependencies:
       colorette: 2.0.19
