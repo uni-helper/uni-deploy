@@ -74,7 +74,7 @@
     "@commitlint/cli": "^17.4.3",
     "@commitlint/config-conventional": "^17.4.3",
     "@commitlint/prompt": "^17.4.3",
-    "@modyqyw/fabric": "^7.0.3",
+    "@modyqyw/fabric": "^8.0.0",
     "@modyqyw/utils": "^4.1.0",
     "@tsconfig/node18": "^1.0.1",
     "@types/lodash-es": "^4.17.6",
