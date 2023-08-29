@@ -1,6 +1,6 @@
-import { defineBuildConfig } from 'unbuild';
 import { unlinkSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { defineBuildConfig } from 'unbuild';
 
 export default defineBuildConfig({
   entries: ['./src/index', './src/cli'],
@@ -9,7 +9,7 @@ export default defineBuildConfig({
   rollup: {
     inlineDependencies: true,
     esbuild: {
-      target: 'node14.18',
+      target: 'node18',
     },
   },
   hooks: {
